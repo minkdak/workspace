@@ -1,0 +1,7 @@
+package step26;
+
+public class MyClass {
+  public int publicVar;
+  String defaultVar;
+  protected boolean protectedVar;
+}

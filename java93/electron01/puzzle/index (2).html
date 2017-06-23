@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>practice</title>
+    <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+     crossorigin="anonymous">
+     <style media="screen">
+     button {
+       padding: 0px;
+       width:78px;
+       height: 50px;
+       font-size: 30px;
+     }
+     </style>
+  </head>
+  <body>
+    <div id="oneFour-div">
+      <button type="button" class='btn btn-primary'>1</button>
+      <button type="button" class='btn btn-warning'>2</button>
+      <button type="button" class='btn btn-primary'>3</button>
+      <button type="button" class='btn btn-warning'>4</button>
+    </div>
+    <div id="fiveEight-div">
+      <button type="button" class='btn btn-primary'>5</button>
+      <button type="button" class='btn btn-warning'>6</button>
+      <button type="button" class='btn btn-primary'>7</button>
+      <button type="button" class='btn btn-warning'>8</button>
+    </div>
+    <div id="nineTwelve-div">
+      <button type="button" class='btn btn-primary'>9</button>
+      <button type="button" class='btn btn-warning'>10</button>
+      <button type="button" class='btn btn-primary'>11</button>
+      <button type="button" class='btn btn-warning'>12</button>
+    </div>
+    <div id="thirteenStar-div">
+      <button type="button" class='btn btn-primary'>13</button>
+      <button type="button" class='btn btn-warning'>14</button>
+      <button type="button" class='btn btn-primary'>15</button>
+      <button type="button" class='btn btn-warning'>*</button>
+    </div>
+    <button type="button" class="btn btn-success" id="btn-s">섞기</button>
+    <script>
+    window.$ = window.jQuery = require('jquery')
+    var oneFourDiv = $('#oneFour-div'),
+        fiveEightDiv = $('#fiveEight-div'),
+        nineTwelveDiv = $('#nineTwelve-div'),
+        thirteenStarDiv = $('#thirteenStar-div')
+
+        var ar,star
+
+        $('#btn-s').click(() => {
+          ar = shuffleRandom(16);
+          $('.btn-primary').remove()
+          $('.btn-warning').remove()
+          addRandomButton()
+          star = starFind(ar)
+          console.log(star)
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function starFind(ar) {
+          for (var i = 0; i < ar.length; i++) {
+            if (ar[i] == 16) {
+              return i
+            }
+          }
+        }
+        function addRandomButton() {
+          for (var i = 0; i < ar.length; i++) {
+            switch(ar[i]) {
+              case 1:
+                if(i < 4)
+                  $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(1).appendTo(oneFourDiv)
+                else if(i < 8 && i > 3)
+                  $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(1).appendTo(fiveEightDiv)
+                else if(i < 12 && i > 7)
+                  $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(1).appendTo(nineTwelveDiv)
+                else
+                  $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(1).appendTo(thirteenStarDiv)
+                break;
+                case 2:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(2).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(2).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(2).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(2).appendTo(thirteenStarDiv)
+                  break;
+                case 3:
+                  if(i < 4)
+                      $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(3).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(3).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(3).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(3).appendTo(thirteenStarDiv)
+                  break;
+                case 4:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(4).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(4).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(4).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(4).appendTo(thirteenStarDiv)
+                  break;
+                case 5:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(5).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(5).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(5).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(5).appendTo(thirteenStarDiv)
+                  break;
+                case 6:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(6).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(6).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(6).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(6).appendTo(thirteenStarDiv)
+                  break;
+                case 7:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(7).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(7).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(7).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(7).appendTo(thirteenStarDiv)
+                  break;
+                case 8:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(8).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(8).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(8).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(8).appendTo(thirteenStarDiv)
+                  break;
+                case 9:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(9).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(9).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(9).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(9).appendTo(thirteenStarDiv)
+                  break;
+                case 10:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(10).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(10).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(10).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(10).appendTo(thirteenStarDiv)
+                  break;
+                case 11:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(11).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(11).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(11).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(11).appendTo(thirteenStarDiv)
+                  break;
+                case 12:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(12).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(12).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(12).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(12).appendTo(thirteenStarDiv)
+                  break;
+                case 13:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(13).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(13).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(13).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(13).appendTo(thirteenStarDiv)
+                  break;
+                case 14:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(14).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(14).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(14).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').text(14).appendTo(thirteenStarDiv)
+                  break;
+                case 15:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(15).appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(15).appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(15).appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-primary').text(15).appendTo(thirteenStarDiv)
+                  break;
+                case 16:
+                  if(i < 4)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').attr('value', '*').text('*').appendTo(oneFourDiv)
+                  else if(i < 8 && i > 3)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').attr('value', '*').text('*').appendTo(fiveEightDiv)
+                  else if(i < 12 && i > 7)
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').attr('value', '*').text('*').appendTo(nineTwelveDiv)
+                  else
+                    $('<button>').attr('type', 'button').attr('class', 'btn btn-warning').attr('value', '*').text('*').appendTo(thirteenStarDiv)
+                  break;
+            }//switch
+          }//for
+        }
+        function shuffleRandom(n){
+          var ar = new Array();
+          var temp;
+          var rnum;
+
+          //전달받은 매개변수 n만큼 배열 생성 ( 1~n )
+          for(var i=1; i<=n; i++){
+              ar.push(i);
+          }
+
+          //값을 서로 섞기
+          for(var i=0; i< ar.length ; i++)
+          {
+              rnum = Math.floor(Math.random() *n); //난수발생
+              temp = ar[i];
+              ar[i] = ar[rnum];
+              ar[rnum] = temp;
+          }
+
+          return ar;
+  }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<!-- AJAX 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+  .container {
+    position: relative;
+    border: 1px solid black;
+    width: 600px;
+    height: 600px;
+    margin: 0px auto;
+    background-color: black;
+  }
+  div {
+    margin: 0
+  }
+  #sun {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: orange;
+    left: 300px;
+    top: 300px;
+
+
+  }
+  #earth {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: blue;
+    left: 150px;
+    top: 300px;
+  }
+
+  #moon{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: gray;
+    left: 100px;
+    top: 300px;
+
+  }
+
+  </style>
+</head>
+<body>
+<div class="container">
+<div id="sun"></div>
+<div id="earth"></div>
+<div id="moon"></div>
+</div> <!-- div.container -->
+
+<script>
+"use strict"
+window.$ = window.jQuery = require('jquery')
+var earth = $('#earth'),
+    moon = $('#moon'),
+    y = 0,
+    x = 0;
+
+
+var degree = 0;
+setInterval(function() {
+  if (degree > 360) {
+    degree = 0
+  }
+	var r = radian(degree)
+  degree += 1;
+  y = Math.floor(Math.sin(r) * 150) + 300;
+  x = Math.floor(Math.cos(r) * 150) + 300;
+
+  console.log(y)
+  earth.css('top', y +'px').css('left', x + 'px')
+
+
+}, 10);
+var moondegree = 0;
+setInterval(function() {
+  if (moondegree > 360) {
+    moondegree = 0
+  }
+	var r = radian(moondegree)
+  moondegree += 1;
+
+  var my = Math.floor(Math.sin(r) * 50) + y;
+  var mx = Math.floor(Math.cos(r) * 50) + x;
+  moon.css('top', my +'px').css('left', mx + 'px')
+}, 5)
+
+function radian(degree) {
+  return degree * Math.PI/180 // 180
+}
+
+</script>
+</body>
+</html>

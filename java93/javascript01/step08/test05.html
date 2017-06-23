@@ -1,0 +1,49 @@
+<!-- AJAX 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <style>
+  body{
+    background-color: gray;
+  }
+  body > div {
+    border: 1px solid red;
+    min-height: 300px;
+  }
+  </style>
+</head>
+<body>
+  <button id="btn1" type="button">서버에 요청하기</button><br>
+  <textarea id="ta" rows="20" cols="80"></textarea>
+<script>
+"use strict"
+/* AJAX(Asynchonous JavaScript and XML)
+=> 현재 페이지를 유지한 채로 웹서버에 요청을 하고 응답을 받는 기법
+=> 웹 페이지에서는 일반적으로 링크나 버튼을 누르면,
+   해당
+   2
+var btn1 = document.querySelector('#btn1')
+var ta = document.querySelector('#ta')
+var xhr;
+btn1.addEventListener('click', function(event) {
+  xhr = new XMLHttpRequest()
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState < 4)
+      return
+
+    ta.value = xhr.responseText
+  }
+  xhr.open('get', 'http://localhost:8080/webapp/student/list.json', true)
+  xhr.send()
+})
+
+</script>
+</body>
+</html>
+
+
+
+
+<!-- -->

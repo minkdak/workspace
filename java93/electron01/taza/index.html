@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <title>타자 게임</title>
+
+ <style>
+ input {
+   margin-left: 35px;
+   height: 20px;
+   width: 200px;
+   text-align: center;
+   font-size: 15px;
+ }
+ .container {
+   display: inline-block;
+   border: black solid 5px;
+   /*box-sizing: border-box;*/
+   padding: 5px;
+   border-style: 1px solid red;
+   width: 300px;
+   height: 300px;
+ }
+ .scr {
+   border: 1px solid gray;
+   width: 290px;
+   height: 45px;
+   padding: 5px;
+   margin: 2px 0px;
+   text-align: center;
+   font-weight: bold;
+   font-size: 30px;
+   line-height: 45px;
+ }
+ /*.output {
+   border: 1px solid gray;
+   width: 225px;
+   height: 100px;
+   font-size: 20px;
+   font-weight: bold;
+   padding: 0 0 0 20px;
+   margin: 0 0 10px 0;
+   text-align: center;
+ }*/
+ .count {
+   /*box-sizing: content-box;*/
+   border: 1px solid gray;
+   width: 290px;
+   height: 45px;
+   padding: 5px;
+   margin: 2px 0px;
+   text-align: center;
+   font-weight: bold;
+ }
+
+ .time {
+   /*box-sizing: content-box;*/
+   border: 1px solid gray;
+   width: 290px;
+   height: 45px;
+   padding: 5px;
+   margin: 2px 0px;
+   text-align: center;
+   font-weight: bold;
+   line-height: 45px;
+ }
+
+ #title {
+   /*box-sizing: content-box;*/
+   border: 1px solid gray;
+   width: 290px;
+   height: 45px;
+   padding: 5px;
+   margin: 2px 0px;
+   text-align: center;
+   font-weight: bold;
+   font-size: 30px;
+   line-height: 45px;
+ }
+ </style>
+</head>
+<body>
+
+</div>
+<div class="container">
+<div class="scr" id=screen>PLAY</div>
+<div class="output" id=score>
+  <div class="count"><a>성공 </a><a id=success-cnt></a></br><a>실패 </a><a id=fault-cnt></a>
+  </div>
+</div>
+<div class="input">
+  <div class="time" id="timeout"></div>
+<input type="text" id="input-word" onkeyPress="enter()">
+<button type="submit" name="btn-submit" id="start-btn">시작</button>
+</div>
+
+<script>
+"use strict"
+window.$ = window.jQuery = require('jquery')
+var scr = $('#screen'),
+    keyboard = $('#input'),
+    word, cnt, scr,
+    scnt = 0,
+    fcnt = 0,
+    i = 0,
+    quiz;
+// $.getJSON("word.json", function(json, event) {
+//     quiz = json.word;
+//     console.log(quiz)
+//     output(i)
+//     enter()
+// });
+// $('#submit-btn').click(matching)
+//
+// function matching() {
+//   word = $("#input-word").val();
+//   console.log(word);
+// }
+
+//output(i);
+$('#start-btn').click(function () { //select를 클릭했을때 함수를 호출하라.
+  var count = 10
+  scnt = 0;
+  fcnt = 0;
+  i = 0;
+  $('#timeout').text('')
+  $("#success-cnt").text(scnt);
+  $("#fault-cnt").text(fcnt);
+  var interval2 = setInterval(function() {
+    if (count == 0 || i == quiz.length) {
+      $("#screen").text("끝났습니다.");
+      $('#timeout').text('Bye~')
+      clearInterval(interval2)
+
+      return
+
+    }
+    $('#timeout').text(count--) // 타임아웃에있는값을?
+  },1000)
+  $.getJSON("word.json", function(json, event) {
+    quiz = json.word;
+    console.log(quiz)
+    output(i)
+    enter()
+  });
+})
+
+function output(i) {
+  $("#screen").text(quiz[i]);
+  $("#success-cnt").text(scnt);
+  $("#fault-cnt").text(fcnt);
+}
+
+function enter() {
+  if(event.keyCode == 13) {
+    if (i == quiz.length) {
+      alert('끝낫습니다')
+      return
+    }
+    word = $("#input-word").val();
+    scr = $("#screen").text();
+    console.log(scr);
+
+    if (word == scr) {
+      $("#screen").text(quiz[++i]);
+      $("#success-cnt").text(++scnt);
+      $("#input-word").val("");
+      // alert("ok")
+    } else {
+      $("#fault-cnt").text(++fcnt);
+      $("#input-word").val("");
+      // alert("fault")
+    }
+  }
+}
+</script>
+</body>
+</html>

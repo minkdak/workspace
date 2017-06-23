@@ -1,0 +1,59 @@
+package bitcamp.java93.servlet;
+/* 회원 관리 만들기 : 조회하기
+ * => MemberDao를 이용하여 클라이언트가 보낸 번호에 해당하는 회원 정보를 찾아
+ *    HTML로 만들어 출력한다.  
+ *  
+ */
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import bitcamp.java93.domain.Teacher;
+import service.TeacherService;
+
+
+@WebServlet(urlPatterns="/teacher/detail")
+public class TeacherDetailServlet extends HttpServlet {
+  private static final long serialVersionUID = 1L; //
+  
+  @Override
+  public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    
+    
+ // 로그인 여부 검사
+    
+//    Teacher loginTeacher = (Teacher)req.getSession().getAttribute("loginTeacher");
+//    if (loginTeacher == null) { // 로그인 하지 않았다면 로그인 화면으로 보낸다.
+//      res.sendRedirect("../auth/login");
+//      return;
+//    }
+    
+    
+    try{
+      TeacherService teacherService = (TeacherService)this.getServletContext().getAttribute("teacherService");      
+      
+      int no = Integer.parseInt(req.getParameter("no"));
+      
+      Teacher teacher = teacherService.get(no);
+      
+      if (teacher == null) {
+        throw new Exception(no + "번 회원이 없습니다.");
+      }
+      
+      req.setAttribute("teacher", teacher);
+      req.setAttribute("view", "/teacher/detail.jsp");
+      
+    } catch (Exception e) {
+      req.setAttribute("error", e);
+    }
+    
+  }
+}

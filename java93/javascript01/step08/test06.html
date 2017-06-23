@@ -1,0 +1,191 @@
+<!-- AJAX 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <style>
+  body {
+    background-color: gray;
+  }
+
+  body > div {
+    border: 1px solid red;
+    min-height: 300px;
+  }
+  </style>
+</head>
+<body>
+<h1>GET요청</h1>
+링크: <a href="http://localhost:8080/webapp/student/list.json?pageNo=1&pageSize=6">요청</a><br>
+<form action="http://localhost:8080/webapp/student/list.json" method="get">
+페이지번호: <input type="text" name="pageNo"><br>
+페이지크기: <input type="text" name="pageSize"><br>
+<button>요청</button> <!--버튼의 타입을 정하지않으면 기본 submit-->
+</form>
+
+<h1>POST요청</h1>
+<form action="http://localhost:8080/webapp/student/list.json" method="post">
+페이지번호: <input type="text" name="pageNo"><br>
+페이지크기: <input type="text" name="pageSize"><br>
+<button>요청</button> <!--버튼의 타입을 정하지않으면 기본 submit-->
+</form>
+
+<script>
+"use strict"
+/*
+HTTP(Hyper-Text Transfer Protocol) 프로토콜
+=> 웹서버(HTTP Server)와 웹브라우저(HTTP Client) 사이에 데이터를 주고 받는 형식
+
+HTTP 요청 형식
+------------------------------------------------------------
+Request-Line CRLF
+((general header | request header | entity header) CRLF)*
+CRLF
+message body
+------------------------------------------------------------
+
+1) Request-Line CRLF
+  => 요청 대상을 가리키는 한 줄 문자열을 보낸다. (Request-Line)
+  => 문법: 요청형식 공백 요청URI 공백 프로토콜버전 줄바꿈
+     예) GET /pub/WWW/TheProject.html HTTP/1.1 (CRLF)
+  => 요청 형식
+  GET : 자원 조회를 요청할 때 사용한다.
+  POST: 자원의 추가, 변경을 요청할 때 사용한다.
+  HEAD: 생성일, 크기 등 자원의 정보만 요구할 때 사용한다.
+  PUT: 자원을 추가를 요청할 때 사용한다.
+  DELETE: 자원 제거를 요청할 떄 사용한다.
+  기타 OPTIONS, TRACE, CONNECT 등이 있다.
+
+
+2) 헤더 정보
+  => 요청에 대한 부가 설명을 담은 데이터이다.
+  => 3가지 종류의 데이터로 구성된다
+  일반정보(general header): 요청과 응답에 공통으로 사용되는 데이터
+  요청정보(request header): 요청할 때만 전달하는 데이터
+  엔티티정보(entity header): 보내는 데이터에 대한 정보.
+                            단 POST 요청일 때만 보낸다.
+  => 문법 - 헤더명: 값 CRLF
+    예) Host: www.w3.org
+3) message body
+  => GET 요청에는 message-body가 없다.
+  => POST 요청일 때 message-body가 추가 된다.
+  => 문법 - 이름=값&이름=값&이름=값
+    예) pageNo=1&pageSize=6&align=desc
+
+HTTP 응답 형식
+------------------------------------------------------------
+Status-Line CRLF
+((general header | response header | entity header) CRLF)*
+CRLF
+message body
+------------------------------------------------------------
+1) Status-Line CRLF
+  => 응답 상태 정보를 표현하는 문자열 한 줄 (Status-Line)
+  => 프로토콜버전 공백 상태코드 공백 간단한설명 (CRLF)
+  => 예) HTTP/1.1 200 OK
+  => 주요 상태 코드와 의미
+  200 : 요청한 자원을 줄 수 있다.
+  301 : 요청한 자원의 주소가 바뀌었다. 다시 요청하라!
+  304 : 요청한 자원이 변경되지 않았다.
+        그러니 웹브라우저가 캐시한 자원을 그냥 사용하라!
+  400 : 요청 형식에 문제가 있다. 올바르게 요청하라!
+  403 : 해당 자원에 대한 요청을 거절한다.
+  404 : 요청한 자원을 못 찾았다.
+
+  => 서버에 보내는 데이터는 요청URI에 포함되어 있다.
+     형식: URL?이름=값&이름=값&이름=값
+     예) GET /student/list.jsp?pageNo=2&pageSize=5 HTTP/1.1 (CRLF)
+
+ 2) 헤더 정보
+   => 응답에 대한 부가 설명을 담은 데이터이다.
+   => 3가지 종류의 데이터로 구성된다
+   일반정보(general header): 요청과 응답에 공통으로 사용되는 데이터
+   요청정보(request header): 응답할 때만 전달하는 데이터
+   엔티티정보(entity header): 응답대한 정보.
+   => 문법 - 헤더명: 값 CRLF
+   예) Host: www.w3.org
+
+  3) mssage-body
+[GET 요청 형식]
+발생하는 경우?
+1) 웹브라우저의 주소창에 주소를 입력한 후 엔터를 칠 때,
+2) 페이지에서 링크를 클릭했을 때,
+3) 입력폼의 method 속성이 get 일 때,
+4) AJAX에서 서버에 연결할 때 'get'으로 설정한 경우,
+
+[POST 요청]
+  1) 입력폼의 method 속성이 post일 때,
+  2) AJAX에서 서버에 연결할 때 'psst'으로 저장하는 경우
+
+[HTTp GET 요청 프로토콜 예]
+1)
+2) 요청 부가 정보를 표현하는 문자열을 여러 줄 보낸다.
+  =>
+  => 형식:
+    general header (CRLF)
+    ...
+    request header (CRLF)
+    ...
+    entity header (CRLF
+    ...
+  => 헤더의 문법
+    헤더명: 값
+  => 예)
+
+3) 빈 줄을 보낸다.
+  => (CRLF)
+
+
+*/
+
+/*
+HTTP 응답 프로토콜
+
+
+2) 응답 결과에 대한 부가 정보
+  => 응답 부가 정보 = 일반정보(general header) +
+                     응답정보(request header) +
+                     보내는 데이터에 대한 정보(entity header)
+  => 형식:
+    general header (CRLF)
+    ...
+    response header (CRLF)
+    ...
+    entity header (CRLF
+    ...
+  => 헤더의 문법
+    헤더명: 값
+  => 예)
+     Server: Apache
+3) 부가 정보의 끝을 의미하는 빈 줄 (CRLF)
+4) 응답 결과
+
+HTTP 응답 프로토콜 예:
+--------------------------------------
+HTTP/1.1 200 OK
+Date: Mon, 10 Apr 2017 03:07:12 GMT
+Server: Apache
+X-Powered-By: PHP/5.5.20
+Vary: Accept-Encoding,User-Agent
+Cache-Control: max-age=0
+Expires: Mon, 10 Apr 2017 03:07:12 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=utf-8
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+....
+--------------------------------------------
+*/
+
+</script>
+</body>
+</html>
+
+
+
+
+<!-- -->

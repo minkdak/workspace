@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <title>messanger</title>
+
+ <style>
+ #chat {
+   margin-left: 30px;
+   height: 20px;
+   width: 200px;
+   text-align: center;
+   font-size: 15px;
+ }
+ .container {
+   display: inline-block;
+   border: black solid 5px;
+   padding: 5px;
+   border-style: 1px solid red;
+   width: 300px;
+   height: 350px;
+ }
+ .scr {
+   border: 1px solid gray;
+   width: 290px;
+   height: 180px;
+   padding: 5px;
+   margin: 2px 0px;
+   text-align: left;
+   font-weight: bold;
+   font-size: small;
+   line-height: 45px;
+}
+
+ .time {
+   border: 1px solid gray;
+   width: 290px;
+   height: 45px;
+   padding: 5px;
+   margin: 2px 0px;
+   text-align: center;
+   font-weight: bold;
+   line-height: 45px;
+ }
+
+ #title {
+   border: 1px solid gray;
+   width: 290px;
+   height: 45px;
+   padding: 5px;
+   margin: 2px 0px;
+   text-align: center;
+   font-weight: bold;
+   font-size: 30px;
+   line-height: 45px;
+ }
+
+ #host {
+   width: 115px;
+   margin: 5px 5px 5px 30px;
+ }
+
+ #port {
+   width: 70px;
+   margin: 5px 5px 5px 2px;
+ }
+ </style>
+</head>
+<body>
+
+<div class="container">
+<h2 id="title">비트 메신저</h2>
+<textarea class="scr" id="response" cols="100" rows="20"></textarea>
+<div class="output" id=score>
+</div>
+<div class="input">
+<input type="text" id="chat" onkeyPress="enter()">
+<button type="button" id="send">보내기</button>
+</div>
+<input id="host" value="localhost"><input id="port" value="8888">
+<button id="connectBtn" type="button">연결</button>
+<button id="closeBtn" type="button">끊기</button>
+<input id="nick" value="minkdak">
+
+ <!-- onkeyPress="enter()" -->
+<script src="index.js"></script>
+</body>
+</html>

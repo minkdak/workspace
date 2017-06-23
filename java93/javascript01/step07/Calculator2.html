@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calcultor</title>
+<style>
+body {
+  font-family: 'Starcraft', monospace;
+  font-weight: bold;
+  font-size: medium;
+}
+table{
+  border: 1px solid red;
+  font-size: 2em;
+  padding: 10px;
+  background-color: rgb(0,0,0);
+}
+
+input {
+  width: 80px;
+  height: 60px;
+  font-family: 'Starcraft', monospace;
+  font-size: 1.2em;
+  text-align: center center;
+  background-color: #696969;
+}
+#screen {
+  width: 360px;
+  height: 60px;
+  text-align: right;
+  background-color: #696969;
+  font-size: 1.5em;
+  /*overflow: hidden;*/
+}
+
+#ac {
+  background-color: rgb(139,0,0);
+}
+
+</style>
+</head>
+
+<body>
+
+<form name="calculator">
+<table>
+<thead>
+  <!-- <input type="text" id="screen"> -->
+  <tr><th colspan="4"><div id="screen" class = "c1"</th></tr>
+</thead>
+<tbody>
+  <tr>
+  <td><input id="ac" type="button" value="AC"></td>
+  <td></td>
+  <td></td>
+  <td><input type="button" value="/"></td>
+  </tr>
+
+
+  <tr>
+  <td><input id="btn7" type="button" value="7" class="num"></input></td>
+  <td><input id="btn8" type="button" value="8" class="num"></td>
+  <td><input id="btn9"type="button" value="9" class="num"></td>
+  <td><input type="button" value="*"></td>
+  </tr>
+
+  <tr>
+  <td><input id="btn4"type="button" value="4" class="num"></td>
+  <td><input id="btn5"type="button" value="5" class="num"></td>
+  <td><input id="btn6"type="button" value="6" class="num"></td>
+  <td><input type="button" value="-"></td>
+  </tr>
+
+  <tr>
+  <td><input id="btn1"type="button" value="1" class="num"></td>
+  <td><input id="btn2"type="button" value="2" class="num"></td>
+  <td><input id="btn3"type="button" value="3" class="num"></td>
+  <td><input type="button" value="+"></td>
+  </tr>
+
+  <tr>
+  <td colspan="2"><input id="btn0" type="button" value="0" class="num"></input></td>
+  <td></td>
+  <td><input type="button" value="="></input></td>
+
+  </tr>
+</tbody>
+</table>
+</form>
+<script>
+// window.confirm('계산기를 사용하겠습니까?')
+var btn0 = document.getElementById('btn0')
+var btn1 = document.getElementById('btn1')
+var btn2 = document.getElementById('btn2')
+var btn3 = document.getElementById('btn3')
+var btn4 = document.getElementById('btn4')
+var btn5 = document.getElementById('btn5')
+var btn6 = document.getElementById('btn6')
+var btn7 = document.getElementById('btn7')
+var btn8 = document.getElementById('btn8')
+var btn9 = document.getElementById('btn9')
+var ac = document.getElementById('ac')
+// var num = document.getElementByClassName('num')
+
+var screen = document.getElementById('screen')
+//
+// num.addEventListener('click', function() {
+//   var num1 = num.value
+//   screen.innerHTML += num1
+// })
+// 숫자 입력 code 시작
+btn0.addEventListener('click', function() {
+  screen.innerHTML += btn0.value
+})
+
+btn1.addEventListener('click', function() {
+  screen.innerHTML += btn1.value
+})
+
+btn2.addEventListener('click', function() {
+  screen.innerHTML += btn2.value
+})
+
+btn3.addEventListener('click', function() {
+  screen.innerHTML += btn3.value
+})
+
+btn4.addEventListener('click', function() {
+  screen.innerHTML += btn4.value
+})
+
+btn5.addEventListener('click', function() {
+  screen.innerHTML += btn5.value
+})
+
+btn6.addEventListener('click', function() {
+  screen.innerHTML += btn6.value
+})
+
+btn7.addEventListener('click', function() {
+  screen.innerHTML += btn7.value
+})
+
+btn8.addEventListener('click', function() {
+  screen.innerHTML += btn8.value
+})
+
+btn9.addEventListener('click', function() {
+  screen.innerHTML += btn9.value
+})
+// 숫자 코드 끝
+
+ac.addEventListener('click', function (){
+  screen.innerHTML = "";
+})
+
+var i;
+for(i = 0;i < screen.length; i++) {
+  if(screen[i].className == 'num') {
+    screen[i].innerHTML = screen[i].innerHTML.substring(0,10);
+  }
+}
+
+
+function init() {
+  this.result = 0;
+  this.plus = function(value) {this.result += value}
+  this.minus = function(value) {this.result -= value}
+  this.multiple = function(value) {this.result *= value}
+  this.divide = function(value) {this.result /= value}
+}
+
+
+
+</script>
+
+</body>
+</html>

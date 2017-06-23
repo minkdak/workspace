@@ -1,0 +1,34 @@
+package bitcamp.java93.servlet;
+/* 회원 관리 만들기: 회원 목록 출력
+ * => 포워드 적용: 오류 처리 부분
+ * => 인클루딩 적용: 웹페이지의 꼬리말 출력 부분 
+ */
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import bitcamp.java93.domain.Teacher;
+import service.TeacherService;
+
+
+@WebServlet(urlPatterns="*.do")
+public class DispatcherServlet extends HttpServlet {
+  private static final long serialVersionUID = 1L; //
+  
+  @Override
+  public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {    
+    try {
+      
+    } catch (Exception e) {
+      req.setAttribute("error", e);
+      req.getRequestDispatcher("/error").forward(req, res);
+      return;
+    }
+  }
+}

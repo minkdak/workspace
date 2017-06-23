@@ -1,0 +1,36 @@
+package bitcamp.java93.listener;
+
+import java.util.HashMap;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+@WebListener
+public class ContextLoaderListener implements ServletContextListener {
+  HashMap<String,Object> objMap = new HashMap<>(); // 객체를 담을 바구니
+
+  @Override
+  public void contextInitialized(ServletContextEvent sce) {
+    ServletContext sc = sce.getServletContext(); // 페이지 컨트롤러를 담을 보관소
+    
+    
+    try {
+      // 1) Spring IoC 컨테이너 객체 생성
+      ApplicationContext appCtx = new ClassPathXmlApplicationContext(
+          sce.getServletContext().getRealPath("application-context.xml")); // 이파일 찾으라고
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+  
+  @Override
+  public void contextDestroyed(ServletContextEvent sce) {
+  }
+
+}

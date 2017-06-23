@@ -1,0 +1,9 @@
+package step26;
+
+public class MySuper {
+  public int superPublicVar;
+  int defaultPublicVar;
+  protected int protectedPublicVar;
+  int superPublicVar;
+  
+}

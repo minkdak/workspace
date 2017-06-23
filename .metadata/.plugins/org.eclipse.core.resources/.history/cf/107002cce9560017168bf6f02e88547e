@@ -1,0 +1,26 @@
+/* Mybatis 퍼시스턴스 프레임워크: 사용
+ * 1) mybatis 라이브러리 파일 가져오기
+ *    - mvnrepository.com "mybatis" 검색
+ *    - build.gradle 파일에 의존 라이브러리 설정 추가
+ *    - "gradle eclipse" 실행하여 이클립스 설정 갱신
+ *    - " 프로젝트 re
+ */
+package step28.ex2;
+
+import java.util.List;
+
+public class Test01 {
+  public static void main(String[] args) throws Exception {
+    String resource = "step28/ex2/mybatis-config.xml";
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    
+    MemberDaoImpl memberDao = new MemberDaoImpl();
+    memberDao.setDBConPool(conPool);
+    
+    List<Member> list = memberDao.selectList(1, 5);
+    for (Member m : list) {
+      System.out.printf("%d, %s, %s, %s\n", m.getNo(), m.getName(), m.getEmail(), m.getTel());
+    }
+  }
+}

@@ -1,0 +1,39 @@
+<!--DOM API 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>TITLE</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <button id= "btn1" type="button">버튼1</button>
+
+<script>
+
+var btn1= document.querySelector("#btn1")
+
+//1 ) addEventListener()를 사용하여 이벤트 핸들러 등록하기
+// => IE9+, 기타 브라우저
+// => IE8 이하: attachEvent() 함수를 사용해야 한다.
+btn1.addEventListener('click', function() {
+  console.log('11111')
+})
+
+btn1.addEventListener('click', function() {
+  console.log('22222')
+})
+
+btn1.addEventListener('click', function() {
+  console.log('33333')
+})
+
+btn1.addEventListener('click', function() {
+  console.log('44444')
+})
+
+</script>
+</body>
+</html>

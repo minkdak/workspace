@@ -1,0 +1,118 @@
+package bitcamp.java93.listener;
+
+//static 멤버를 이 클래스에서 찾아라!
+import static org.reflections.ReflectionUtils.getAllMethods;
+import static org.reflections.ReflectionUtils.withModifier;
+import static org.reflections.ReflectionUtils.withParametersCount;
+import static org.reflections.ReflectionUtils.withPrefix;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+
+import org.reflections.Reflections;
+
+import bitcamp.java93.annotation.Component;
+import bitcamp.java93.control.Controller;
+import bitcamp.java93.util.DBConnectionPool;
+
+@WebListener
+public class ContextLoaderListener implements ServletContextListener {
+  HashMap<String,Object> objMap = new HashMap<>(); // 객체를 담을 바구니
+
+  @Override
+  public void contextInitialized(ServletContextEvent sce) {
+    ServletContext sc = sce.getServletContext(); // 페이지 컨트롤러를 담을 보관소
+    
+    // 웹 애플리케이션이 시작될 때 DAO를 생성하여 ServletContext 보관소에 저장한다.
+    String jdbcDriver = "com.mysql.jdbc.Driver";
+    String jdbcUrl = "jdbc:mysql://localhost:3306/webappdb";
+    String jdbcUsername = "webapp";
+    String jdbcPassword = "1111";
+    
+    try {
+      DBConnectionPool conPool = new DBConnectionPool(
+          jdbcDriver, jdbcUrl, jdbcUsername, jdbcPassword);
+      objMap.put("conPool", conPool);
+      
+      createObjects("bitcamp.java93");
+      injectDependencies();
+      saveControllerIn(sc); // ServletContext 보관소에
+      
+      
+      // Controllser 구현체만 ServletContext 보관소에 저장하자!
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+    private void createObjects(String packageName) throws Exception {
+      Reflections reflections = new Reflections(packageName);
+      Set<Class<?>> components = 
+          reflections.getTypesAnnotatedWith(Component.class);
+      
+      Component anno = null;
+      for (Class<?> clazz : components) {
+        System.out.println(clazz.getCanonicalName());
+        anno = clazz.getAnnotation(Component.class); // 클래스에서 @Component 애노테이션을 추출
+        Object obj = clazz.newInstance();
+        if (anno.value().equals("")) {
+          objMap.put(clazz.getCanonicalName(), obj);
+        } else {
+          objMap.put(anno.value(), obj);
+        }
+      }
+    }
+      
+    private void injectDependencies() throws Exception {
+      Collection<Object> objList = objMap.values();
+      for (Object obj : objList) {
+        @SuppressWarnings("unchecked")
+        Set<Method> setters = getAllMethods(
+            obj.getClass(),
+            withModifier(Modifier.PUBLIC),
+            withPrefix("set"),
+            withParametersCount(1));
+      for (Method m : setters) {
+        Class<?> paramType = m.getParameterTypes()[0];
+        Object dependency = findDependency(paramType);
+        if (dependency != null) {
+          m.invoke(obj, dependency);
+        }
+      }
+      }
+    }
+  
+
+  private Object findDependency(Class<?> clazz) {
+    Collection<Object> objList = objMap.values();
+    for (Object obj : objList) {
+      if (clazz.isInstance(obj)) {
+        return obj;
+      }
+    }
+    return null;
+  }
+  
+  private void saveControllerIn(ServletContext sc) {
+    Set<Entry<String, Object>> entrySet = objMap.entrySet();  /*String이 키고 Object가 value 한쌍이다. = entryset*/
+    for (Entry<String,Object> entry : entrySet) {
+      if (entry.getValue() instanceof Controller) {
+        sc.setAttribute(entry.getKey(), entry.getValue());
+      }
+    }
+  }
+  
+  @Override
+  public void contextDestroyed(ServletContextEvent sce) {
+  }
+
+}

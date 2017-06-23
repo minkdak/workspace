@@ -1,0 +1,40 @@
+/* Mybatis 퍼시스턴스 프레임워크: 동적 SQL 사용
+ * => 동적(dynamic) SQL?
+ *    - 조건에 따라 SQL문이 변경되는 것을 말한다.
+ */
+package step28.ex3;
+
+import java.io.InputStream;
+import java.util.List;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+public class Test01 {
+  public static void main(String[] args) throws Exception {
+    InputStream inputStream = Resources.getResourceAsStream("step28/ex3/mybatis-config.xml");
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    
+    MemberDaoImpl memberDao = new MemberDaoImpl();
+    memberDao.setSqlSessionFactory(sqlSessionFactory);
+    
+    List<Member> list = memberDao.selectListByEmail(1, 100, "kang200@test.com");
+    for (Member m : list) {
+      System.out.printf("%d, %s, %s, %s\n", m.getNo(), m.getName(), m.getEmail(), m.getTel());
+    }
+    System.out.println("------------------------");
+    
+    list = memberDao.selectListByName(1, 100, "강사200");
+    for (Member m : list) {
+      System.out.printf("%d, %s, %s, %s\n", m.getNo(), m.getName(), m.getEmail(), m.getTel());
+    }
+    System.out.println("------------------------");
+    
+    list = memberDao.selectListByTel(1, 100, "1111");
+    for (Member m : list) {
+      System.out.printf("%d, %s, %s, %s\n", m.getNo(), m.getName(), m.getEmail(), m.getTel());
+    }
+    System.out.println("------------------------");
+  }
+}

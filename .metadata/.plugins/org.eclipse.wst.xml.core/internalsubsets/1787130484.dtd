@@ -1,0 +1,7 @@
+
+<!ELEMENT students (student+)>
+<!ELEMENT student (#PCDATA)>
+
+<!ENTITY knbit "강남교육센터">
+<!ENTITY jrbit "종로교육센터">
+

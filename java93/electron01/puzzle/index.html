@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>숫자퍼즐</title>
+  <style>
+  .btn-number {
+    display: inline-block;
+    background-color: #FFEF57;
+    border: 1px solid gray;
+    box-sizing: border-box;
+    width: 70px;
+    height: 70px;
+    padding: 15px 5px 5px 5px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 3px;
+  }
+
+  .container {
+    width: 300px;
+    padding: 10px 5px 10px 10px;
+  }
+
+  #num0 {
+    background-color: darkgray;
+    text-indent: -9999px;
+    background-color: #726704;
+  }
+  </style>
+</head>
+<body>
+<div class='container'>
+<div id="number-list">
+  <!-- <button type='button' class='btn'>1</button
+  ><button type='button' class='btn'>2</button
+  ><button type='button' class='btn'>3</button
+  ><button type='button' class='btn'>4</button
+  ><button type='button' class='btn'>5</button
+  ><button type='button' class='btn'>6</button
+  ><button type='button' class='btn'>7</button
+  ><button type='button' class='btn'>8</button
+  ><button type='button' class='btn'>9</button
+  ><button type='button' class='btn'>10</button
+  ><button type='button' class='btn'>11</button
+  ><button type='button' class='btn'>12</button
+  ><button type='button' class='btn'>13</button
+  ><button type='button' class='btn'>14</button
+  ><button type='button' class='btn'>15</button
+  ><button type='button' class='btn' display="none">*</button
+  ><button type='button' class='btn-random'>섞기</button> -->
+</div>
+<button type="button" class="suffle" id="suffle-btn">섞기</button>
+<script>
+"use strict"
+window.$ = window.jQuery = require('jquery')
+var number = ["1", "2", "3", "4", "5", "6", "7", "8", "9",
+              "10", "11", "12", "13", "14", "15", "0"]
+
+var sr = "*"
+var puzzle = $('#number-list')
+
+// for (var i = 0; i < number.length; i++) {
+//   puzzle.append($('<button>').text(number[i])
+//                                  .addClass('btn-number')
+//                                  .attr('type', 'button')
+//                                  .attr('id', 'num'+number[i]))
+// }
+  // puzzleList.append($('<button>').text(sr)
+  //                                .addClass('btn-number')
+  //                                .attr('type', 'button'))
+function shuffle(number) {
+    for (let i = number.length; i; i--) {
+        let j = Math.floor(Math.random() * i);
+        [number[i - 1], number[j]] = [number[j], number[i - 1]];
+    }
+    for (var i = 0; i < number.length; i++) {
+      puzzle.append($('<button>').text(number[i])
+                                     .addClass('btn-number')
+                                     .attr('type', 'button')
+                                     .attr('id', 'num'+number[i]))
+    }
+}
+shuffle(number)
+
+$('#suffle-btn').click(function() {
+  console.log('섞을게')
+  $('.btn-number').remove();
+  shuffle(number)
+})
+
+// for(var i = 0; i < number.length; i++){
+//   // console.log(Math.random(number[i]*i))
+//   console.log(Math.floor(Math.random(number[i]) * i))
+//
+// }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+package step28.ex4;
+
+import java.sql.Date;
+
+public class Project {
+  int no;
+  String title;
+  String content;
+  Date startDate;
+  Date endDate;
+  String photoPath;
+}

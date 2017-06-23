@@ -1,0 +1,80 @@
+<!--DOM API 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>TITLE</title>
+  <style>
+  /* 태그의 콘텐츠나 값을 다루기
+  */
+
+  .c1 {
+    background-color: yellow;
+  }
+
+  .c2 {
+    background-color: red;
+  }
+
+  .c3 {
+    border: 2px solid blue;
+  }
+  </style>
+</head>
+<body>
+  <div id="d1" class="c1">d1</div>
+  <a id="a1" href="http://www.google.com">구글</a><br>
+  <button id="btn1" type="button">속성 추가하기</button>
+  <button id="btn2" type="button">속성 추가하기2</button>
+  <button id="btn3" type="button">속성 추가하기3</button>
+<script>
+var d1= document.querySelector("#d1")
+var a1= document.querySelector("#a1")
+var btn1 = document.querySelector("#btn1")
+var btn2 = document.querySelector("#btn2")
+var btn3 = document.querySelector("#btn3")
+
+btn1.addEventListener('click', function() {
+  d1.okok = "하하하"
+  a1.nono = "호휴호"
+
+  console.log(d1.okok)
+  console.log(a1.nono)
+  console.log(d1.getAttribute("okok"))
+  console.log(a1.getAttribute("nono"))
+  console.log("----------------------------")
+})
+
+btn2.addEventListener('click', function() {
+  d1.setAttribute("okok2", "헐...")
+  a1.setAttribute("nono2", "후후~~~")
+  console.log(d1.okok2)
+  console.log(a1.nono2)
+
+  console.log(d1.getAttribute("okok2"))
+  console.log(a1.getAttribute("nono2"))
+  console.log("----------------------------")
+})
+
+btn3.addEventListener('click', function() {
+  // 태그에 속성을 추가할 때 속성의 이름은 data-xxxx 형태로 지정하라!
+  // HTML 프로그래밍 권고 사항이다.
+  //
+  d1.setAttribute("data-okok", "헐...")
+  a1.setAttribute("data-nono", "후후~~~")
+
+  console.log(d1.getAttribute("data-okok"))
+  console.log(a1.getAttribute("data-nono"))
+  console.log("----------------------------")
+})
+
+var obj = {}
+obj.prop1 = 10;
+obj.prop2 = "okok";
+obj.prop3 = true;
+obj.prop4 = {};
+obj.prop5 = function() {}
+</script>
+</body>
+
+</html>

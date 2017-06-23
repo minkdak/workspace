@@ -1,0 +1,200 @@
+<!-- AJAX 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+  .container {
+    width: 600px;
+    margin: 0px auto;
+  }
+  </style>
+</head>
+<body>
+<div class="container">
+<h1>학생 정보</h1>
+<form class="form-horizontal">
+  <div class="form-group bit-view">
+    <label class="col-sm-2 control-label">번호</label>
+    <div class="col-sm-10">
+      <p class="form-control-static" id="fi-no"></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-email" class="col-sm-2 control-label">이메일</label>
+    <div class="col-sm-7">
+      <input type="email" class="form-control" id="fi-email" placeholder="이메일">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-name" class="col-sm-2 control-label">이름</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fi-name" placeholder="이름">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-tel" class="col-sm-2 control-label">전화번호</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fi-tel" placeholder="전화번호">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fi-school-name" class="col-sm-2 control-label">학교명</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="fi-school-name" placeholder="학교명">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" id="fi-working"> 재직중
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="button" class="btn btn-primary bit-view" id="upd-btn">변경</button>
+      <button type="button" class="btn btn-primary bit-view" id="del-btn">삭제</button>
+      <button type="button" class="btn btn-primary bit-new" id="add-btn">추가</button>
+      <button type="button" class="btn btn-primary" id="lst-btn">목록</button>
+    </div>
+  </div>
+</form>
+</div>
+<script>window.$ = window.jQuery = require('jquery')</script>
+<script>
+  const mysql = require('mysql')
+  var connection = mysql.createConnection({
+    database: 'webappdb',
+    user: 'webapp',
+    password: '1111'
+  })
+  connection.connect()
+</script>
+<script>
+"use strict"
+/* AJAX 응용 II
+=> 학생 상세 정보 출력
+*/
+
+var fiNo = $('#fi-no'),
+    fiEmail = $('#fi-email'),
+    fiName = $('#fi-name'),
+    fiTel = $('#fi-tel'),
+    fiSchoolName = $('#fi-school-name'),
+    fiWorking = $('#fi-working');
+
+if (location.search == "") {
+  // 새 사용자 등록을 처리한다.
+  // 상세보기와 관련된 태그는 감춘다.
+  $('.bit-view').css('display', 'none')
+
+  // 새 사용자 등록과 관련된 태그는 보이게 한다.
+  $('.bit-new').css('display', '')
+
+  // 추가 버튼에 click 이벤트 핸들러(리스너)를 등록한다.
+  $('#add-btn').click(function() {
+
+
+    connection.query(
+            // 'insert into memb(NAME,TEL,EMAIL,PWD) values("fiName","fiTel","fiEmail","1111" )',
+   
+            'insert into memb(NAME,TEL,EMAIL,PWD) values("' + fiName.val() + '","' + fiTel.val() + '","'+ fiEmail.val() + '",password("1111"))',
+            function(error, results) {
+              if (error) {
+                alert('데이터 조회 중 발생!')
+                throw error;
+              }
+              console.log('success');
+              console.log(results.insertId);
+              connection.query(
+                'insert into stud(sno, work, schl_nm) values('+results.insertId+',"1","'+ fiSchoolName.val() +'")',
+                function(error, results) {
+                  if (error) {
+                    alert('데이터 조회 중 발생2')
+                    throw error;
+                  }
+                  console.log('success');
+                  location.href='index.html'
+                }
+              )
+            }) //connection.query()
+      })
+
+}
+else { // 기존 사용자 정보를 가져온다.
+  var no = location.search.substring(1).split('=')[1]
+  $('.bit-new').css('display', 'none')
+  connection.query(//비동기 명령어 이다.
+    'select m.mno, m.name,\
+    s.work, m.email,m.tel,\
+    s.schl_nm from memb m \
+    join stud s on m.mno = s.sno\
+    where s.sno =' + no,
+    function(error, results) {
+      if (error) {
+        alert('오류')
+        throw error;
+      }
+          let s = results[0]
+          fiNo.text(s.mno)
+          fiEmail.val(s.email)
+          fiName.val(s.name)
+          fiTel.val(s.tel)
+          fiSchoolName.val(s.schl_nm)
+          fiWorking.prop('checked', s.workking)
+    })
+  $('#upd-btn').click(function() {
+    connection.query(//비동기 명령어 이다.
+      'update stud set work="1",schl_nm="'+fiSchoolName.val()+'" where sno='+no,
+      function(error, results) {
+        if (error) {
+          alert('오류')
+          throw error;
+        }
+        connection.query(//비동기 명령어 이다.
+          'update memb set name="'+ fiName.val() +'",email="'+fiEmail.val()+'", tel="'+ fiTel.val() +'"where mno='+no,
+          function(error, results) {
+            if (error) {
+              alert('오류')
+              throw error;
+            }
+            alert('성공')
+            location.href='index.html'
+          })
+      }) // click()
+  })
+
+  $('#del-btn').click(function() {
+    connection.query(
+      'delete from stud where sno='+no,
+      function(error, results) {
+        if (error) {
+          alert('오류')
+          throw error
+        }
+        connection.query(
+          'delete from memb where mno='+no,
+          function(error, results) {
+            if (error) {
+              alert('오류')
+              throw error
+            }
+            alert('성공')
+            location.href='index.html'
+          })
+      })
+  }) // click()
+}// else
+
+$('#lst-btn').click(function() {
+  location.href = "index.html"
+})
+</script>
+</body>
+</html>
+<!-- -->

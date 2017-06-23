@@ -1,0 +1,535 @@
+-- 강의
+DROP TABLE IF EXISTS `MY_SCHEMA`.`LECT` RESTRICT;
+
+-- 학생
+DROP TABLE IF EXISTS `MY_SCHEMA`.`STUD` RESTRICT;
+
+-- 강사
+DROP TABLE IF EXISTS `MY_SCHEMA`.`TCHER` RESTRICT;
+
+-- 매니저
+DROP TABLE IF EXISTS `MY_SCHEMA`.`MGR` RESTRICT;
+
+-- 과목
+DROP TABLE IF EXISTS `MY_SCHEMA`.`SUBJ` RESTRICT;
+
+-- 교실
+DROP TABLE IF EXISTS `MY_SCHEMA`.`CROOM` RESTRICT;
+
+-- 게시판
+DROP TABLE IF EXISTS `MY_SCHEMA`.`BOARD` RESTRICT;
+
+-- 자료실
+DROP TABLE IF EXISTS `MY_SCHEMA`.`FBOARD` RESTRICT;
+
+-- QnA
+DROP TABLE IF EXISTS `MY_SCHEMA`.`QNA` RESTRICT;
+
+-- 교육과정
+DROP TABLE IF EXISTS `MY_SCHEMA`.`CURR` RESTRICT;
+
+-- 교실사진
+DROP TABLE IF EXISTS `MY_SCHEMA`.`CR_PIC` RESTRICT;
+
+-- 주소
+DROP TABLE IF EXISTS `MY_SCHEMA`.`ADDR` RESTRICT;
+
+-- 교육과정과목
+DROP TABLE IF EXISTS `MY_SCHEMA`.`TABLE19` RESTRICT;
+
+-- 강의수강생
+DROP TABLE IF EXISTS `MY_SCHEMA`.`LECT_STUD` RESTRICT;
+
+-- 강의배정
+DROP TABLE IF EXISTS `MY_SCHEMA`.`LECT_TCHER` RESTRICT;
+
+-- 회원
+DROP TABLE IF EXISTS `MY_SCHEMA`.`MEMB` RESTRICT;
+
+-- 강의
+CREATE TABLE `MY_SCHEMA`.`LECT` (
+	`LNO`      INTEGER NOT NULL COMMENT '강의번호', -- 강의번호
+	`SDT`      DATE    NOT NULL COMMENT '시작일', -- 시작일
+	`EDT`      DATE    NOT NULL COMMENT '종료일', -- 종료일
+	`QTY`      INTEGER NOT NULL COMMENT '모집인원', -- 모집인원
+	`TOTL_HRS` INTEGER NOT NULL COMMENT '총강의시간', -- 총강의시간
+	`DAY_HRS`  INTEGER NOT NULL COMMENT '일강의시간', -- 일강의시간
+	`PAY`      INTEGER NULL     COMMENT '강의료', -- 강의료
+	`GOV_SUPP` CHAR(1) NOT NULL COMMENT '정부지원유무', -- 정부지원유무
+	`EDU_NO`   INTEGER NOT NULL COMMENT '교육과정번호', -- 교육과정번호
+	`CRNO`     INTEGER NULL     COMMENT '교실번호', -- 교실번호
+	`MNO`      INTEGER NULL     COMMENT '매니저번호' -- 매니저번호
+)
+COMMENT '강의';
+
+-- 강의
+ALTER TABLE `MY_SCHEMA`.`LECT`
+	ADD CONSTRAINT `PK_LECT` -- 강의 기본키
+		PRIMARY KEY (
+			`LNO` -- 강의번호
+		);
+
+ALTER TABLE `MY_SCHEMA`.`LECT`
+	MODIFY COLUMN `LNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '강의번호';
+
+-- 학생
+CREATE TABLE `MY_SCHEMA`.`STUD` (
+	`MNO`     INTEGER NOT NULL COMMENT '학생번호', -- 학생번호
+	`BTDH_DT` DATE    NULL     COMMENT '생년월일', -- 생년월일
+	`WORK`    CHAR(1) NOT NULL COMMENT '재직여부' -- 재직여부
+)
+COMMENT '학생';
+
+-- 학생
+ALTER TABLE `MY_SCHEMA`.`STUD`
+	ADD CONSTRAINT `PK_STUD` -- 학생 기본키
+		PRIMARY KEY (
+			`MNO` -- 학생번호
+		);
+
+-- 강사
+CREATE TABLE `MY_SCHEMA`.`TCHER` (
+	`MNO`    INTEGER      NOT NULL COMMENT '강사번호', -- 강사번호
+	`PAY_HR` INTEGER      NOT NULL COMMENT '시강료', -- 시강료
+	`RESM`   VARCHAR(255) NULL     COMMENT '이력서' -- 이력서
+)
+COMMENT '강사';
+
+-- 강사
+ALTER TABLE `MY_SCHEMA`.`TCHER`
+	ADD CONSTRAINT `PK_TCHER` -- 강사 기본키
+		PRIMARY KEY (
+			`MNO` -- 강사번호
+		);
+
+-- 매니저
+CREATE TABLE `MY_SCHEMA`.`MGR` (
+	`MNO`  INTEGER     NOT NULL COMMENT '매니저번호', -- 매니저번호
+	`COL4` VARCHAR(40) NULL     COMMENT '직급' -- 직급
+)
+COMMENT '매니저';
+
+-- 매니저
+ALTER TABLE `MY_SCHEMA`.`MGR`
+	ADD CONSTRAINT `PK_MGR` -- 매니저 기본키
+		PRIMARY KEY (
+			`MNO` -- 매니저번호
+		);
+
+-- 과목
+CREATE TABLE `MY_SCHEMA`.`SUBJ` (
+	`SBNO`     INTEGER      NOT NULL COMMENT '과목번호', -- 과목번호
+	`TITN`     VARCHAR(255) NOT NULL COMMENT '과목명', -- 과목명
+	`RPO_LANG` VARCHAR(40)  NULL     COMMENT '언어', -- 언어
+	`TINTFO`   TEXT         NULL     COMMENT '설명' -- 설명
+)
+COMMENT '과목';
+
+-- 과목
+ALTER TABLE `MY_SCHEMA`.`SUBJ`
+	ADD CONSTRAINT `PK_SUBJ` -- 과목 기본키
+		PRIMARY KEY (
+			`SBNO` -- 과목번호
+		);
+
+-- 과목 유니크 인덱스
+CREATE UNIQUE INDEX `UIX_SUBJ`
+	ON `MY_SCHEMA`.`SUBJ` ( -- 과목
+		`TITN` ASC -- 과목명
+	);
+
+ALTER TABLE `MY_SCHEMA`.`SUBJ`
+	MODIFY COLUMN `SBNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '과목번호';
+
+-- 교실
+CREATE TABLE `MY_SCHEMA`.`CROOM` (
+	`CRNO` INTEGER     NOT NULL COMMENT '교실번호', -- 교실번호
+	`NAME` VARCHAR(40) NOT NULL COMMENT '교실명', -- 교실명
+	`LOC`  VARCHAR(40) NOT NULL COMMENT '지점' -- 지점
+)
+COMMENT '교실';
+
+-- 교실
+ALTER TABLE `MY_SCHEMA`.`CROOM`
+	ADD CONSTRAINT `PK_CROOM` -- 교실 기본키
+		PRIMARY KEY (
+			`CRNO` -- 교실번호
+		);
+
+ALTER TABLE `MY_SCHEMA`.`CROOM`
+	MODIFY COLUMN `CRNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '교실번호';
+
+-- 게시판
+CREATE TABLE `MY_SCHEMA`.`BOARD` (
+	`BNO`  INTEGER      NOT NULL COMMENT '게시물번호', -- 게시물번호
+	`TITL` VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+	`CONT` MIDIUMTEXT   NULL     COMMENT '내용', -- 내용
+	`VWS`  INTEGER      NOT NULL COMMENT '조회수', -- 조회수
+	`CDT`  DATETIME     NOT NULL COMMENT '등록일', -- 등록일
+	`MNO`  INTEGER      NOT NULL COMMENT '회원번호' -- 회원번호
+)
+COMMENT '게시판';
+
+-- 게시판
+ALTER TABLE `MY_SCHEMA`.`BOARD`
+	ADD CONSTRAINT `PK_BOARD` -- 게시판 기본키
+		PRIMARY KEY (
+			`BNO` -- 게시물번호
+		);
+
+ALTER TABLE `MY_SCHEMA`.`BOARD`
+	MODIFY COLUMN `BNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시물번호';
+
+-- 자료실
+CREATE TABLE `MY_SCHEMA`.`FBOARD` (
+	`FNO`     INTEGER      NOT NULL COMMENT '자료번호', -- 자료번호
+	`TITL`    VARCHAR(255) NOT NULL COMMENT '파일명', -- 파일명
+	`FL_PATH` VARCHAR(255) NOT NULL COMMENT '파일경로', -- 파일경로
+	`CONT`    TEXT         NULL     COMMENT '설명', -- 설명
+	`DNS`     INTEGER      NULL     COMMENT '다운로드수', -- 다운로드수
+	`CDT`     DATETIME     NOT NULL COMMENT '등록일', -- 등록일
+	`MNO`     INTEGER      NOT NULL COMMENT '회원번호' -- 회원번호
+)
+COMMENT '자료실';
+
+-- 자료실
+ALTER TABLE `MY_SCHEMA`.`FBOARD`
+	ADD CONSTRAINT `PK_FBOARD` -- 자료실 기본키
+		PRIMARY KEY (
+			`FNO` -- 자료번호
+		);
+
+ALTER TABLE `MY_SCHEMA`.`FBOARD`
+	MODIFY COLUMN `FNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '자료번호';
+
+-- QnA
+CREATE TABLE `MY_SCHEMA`.`QNA` (
+	`QANO` INTEGER  NOT NULL COMMENT '질문번호', -- 질문번호
+	`QST`  TEXT     NOT NULL COMMENT '질문', -- 질문
+	`CDT`  DATETIME NOT NULL COMMENT '등록일', -- 등록일
+	`ANR`  TEXT     NULL     COMMENT '답변', -- 답변
+	`ADT`  DATETIME NULL     COMMENT '답변일', -- 답변일
+	`MNO`  INTEGER  NOT NULL COMMENT '회원번호' -- 회원번호
+)
+COMMENT 'QnA';
+
+-- QnA
+ALTER TABLE `MY_SCHEMA`.`QNA`
+	ADD CONSTRAINT `PK_QNA` -- QnA 기본키
+		PRIMARY KEY (
+			`QANO` -- 질문번호
+		);
+
+ALTER TABLE `MY_SCHEMA`.`QNA`
+	MODIFY COLUMN `QANO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '질문번호';
+
+-- 교육과정
+CREATE TABLE `MY_SCHEMA`.`CURR` (
+	`EDU_NO` INTEGER      NOT NULL COMMENT '교육과정번호', -- 교육과정번호
+	`TITL`   VARCHAR(255) NOT NULL COMMENT '과정명', -- 과정명
+	`CONT`   MIDIUMTEXT   NOT NULL COMMENT '내용' -- 내용
+)
+COMMENT '교육과정';
+
+-- 교육과정
+ALTER TABLE `MY_SCHEMA`.`CURR`
+	ADD CONSTRAINT `PK_CURR` -- 교육과정 기본키
+		PRIMARY KEY (
+			`EDU_NO` -- 교육과정번호
+		);
+
+-- 교육과정 유니크 인덱스
+CREATE UNIQUE INDEX `UIX_CURR`
+	ON `MY_SCHEMA`.`CURR` ( -- 교육과정
+		`TITL` ASC -- 과정명
+	);
+
+ALTER TABLE `MY_SCHEMA`.`CURR`
+	MODIFY COLUMN `EDU_NO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '교육과정번호';
+
+-- 교실사진
+CREATE TABLE `MY_SCHEMA`.`CR_PIC` (
+	`CRPNO` INTEGER      NOT NULL COMMENT '교실사진번호', -- 교실사진번호
+	`PATH`  VARCHAR(255) NOT NULL COMMENT '사진1', -- 사진1
+	`CRONO` INTEGER      NOT NULL COMMENT '교실번호' -- 교실번호
+)
+COMMENT '교실사진';
+
+-- 교실사진
+ALTER TABLE `MY_SCHEMA`.`CR_PIC`
+	ADD CONSTRAINT `PK_CR_PIC` -- 교실사진 기본키
+		PRIMARY KEY (
+			`CRPNO` -- 교실사진번호
+		);
+
+ALTER TABLE `MY_SCHEMA`.`CR_PIC`
+	MODIFY COLUMN `CRPNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '교실사진번호';
+
+-- 주소
+CREATE TABLE `MY_SCHEMA`.`ADDR` (
+	`ARNO`     INTEGER      NOT NULL COMMENT '주소번호', -- 주소번호
+	`PST_NO`   VARCHAR(10)  NOT NULL COMMENT '우편번호', -- 우편번호
+	`BAS_ADDR` VARCHAR(255) NOT NULL COMMENT '기본주소' -- 기본주소
+)
+COMMENT '주소';
+
+-- 주소
+ALTER TABLE `MY_SCHEMA`.`ADDR`
+	ADD CONSTRAINT `PK_ADDR` -- 주소 기본키
+		PRIMARY KEY (
+			`ARNO` -- 주소번호
+		);
+
+ALTER TABLE `MY_SCHEMA`.`ADDR`
+	MODIFY COLUMN `ARNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '주소번호';
+
+-- 교육과정과목
+CREATE TABLE `MY_SCHEMA`.`TABLE19` (
+	`EDU_NO` INTEGER NOT NULL COMMENT '교육과정번호', -- 교육과정번호
+	`SBNO`   INTEGER NOT NULL COMMENT '과목번호' -- 과목번호
+)
+COMMENT '교육과정과목';
+
+-- 교육과정과목
+ALTER TABLE `MY_SCHEMA`.`TABLE19`
+	ADD CONSTRAINT `PK_TABLE19` -- 교육과정과목 기본키
+		PRIMARY KEY (
+			`EDU_NO`, -- 교육과정번호
+			`SBNO`    -- 과목번호
+		);
+
+-- 강의수강생
+CREATE TABLE `MY_SCHEMA`.`LECT_STUD` (
+	`LNO` INTEGER NOT NULL COMMENT '강의번호', -- 강의번호
+	`MNO` INTEGER NOT NULL COMMENT '학생번호' -- 학생번호
+)
+COMMENT '강의수강생';
+
+-- 강의수강생
+ALTER TABLE `MY_SCHEMA`.`LECT_STUD`
+	ADD CONSTRAINT `PK_LECT_STUD` -- 강의수강생 기본키
+		PRIMARY KEY (
+			`LNO`, -- 강의번호
+			`MNO`  -- 학생번호
+		);
+
+-- 강의배정
+CREATE TABLE `MY_SCHEMA`.`LECT_TCHER` (
+	`LNO` INTEGER NOT NULL COMMENT '강의번호', -- 강의번호
+	`MNO` INTEGER NOT NULL COMMENT '강사번호' -- 강사번호
+)
+COMMENT '강의배정';
+
+-- 강의배정
+ALTER TABLE `MY_SCHEMA`.`LECT_TCHER`
+	ADD CONSTRAINT `PK_LECT_TCHER` -- 강의배정 기본키
+		PRIMARY KEY (
+			`LNO`, -- 강의번호
+			`MNO`  -- 강사번호
+		);
+
+-- 회원
+CREATE TABLE `MY_SCHEMA`.`MEMB` (
+	`MNO`       INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+	`NAME`      VARCHAR(40)  NOT NULL COMMENT '이름', -- 이름
+	`TEL`       VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
+	`EMAIL`     VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
+	`DEET_ADDR` VARCHAR(255) NULL     COMMENT '상세주소', -- 상세주소
+	`PIC_PATH`  VARCHAR(255) NULL     COMMENT '사진', -- 사진
+	`LST_SCHL`  VARCHAR(10)  NULL     COMMENT '최종학력', -- 최종학력
+	`SCHL_NM`   VARCHAR(40)  NULL     COMMENT '학교명', -- 학교명
+	`ARNO`      INTEGER      NULL     COMMENT '주소번호' -- 주소번호
+)
+COMMENT '회원';
+
+-- 회원
+ALTER TABLE `MY_SCHEMA`.`MEMB`
+	ADD CONSTRAINT `PK_MEMB` -- 회원 기본키
+		PRIMARY KEY (
+			`MNO` -- 회원번호
+		);
+
+-- 회원 유니크 인덱스
+CREATE UNIQUE INDEX `UIX_MEMB`
+	ON `MY_SCHEMA`.`MEMB` ( -- 회원
+		`EMAIL` ASC -- 이메일
+	);
+
+-- 회원 인덱스
+CREATE INDEX `IX_MEMB`
+	ON `MY_SCHEMA`.`MEMB`( -- 회원
+		`NAME` ASC -- 이름
+	);
+
+ALTER TABLE `MY_SCHEMA`.`MEMB`
+	MODIFY COLUMN `MNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
+
+-- 강의
+ALTER TABLE `MY_SCHEMA`.`LECT`
+	ADD CONSTRAINT `FK_CURR_TO_LECT` -- 교육과정 -> 강의
+		FOREIGN KEY (
+			`EDU_NO` -- 교육과정번호
+		)
+		REFERENCES `MY_SCHEMA`.`CURR` ( -- 교육과정
+			`EDU_NO` -- 교육과정번호
+		);
+
+-- 강의
+ALTER TABLE `MY_SCHEMA`.`LECT`
+	ADD CONSTRAINT `FK_CROOM_TO_LECT` -- 교실 -> 강의
+		FOREIGN KEY (
+			`CRNO` -- 교실번호
+		)
+		REFERENCES `MY_SCHEMA`.`CROOM` ( -- 교실
+			`CRNO` -- 교실번호
+		);
+
+-- 강의
+ALTER TABLE `MY_SCHEMA`.`LECT`
+	ADD CONSTRAINT `FK_MGR_TO_LECT` -- 매니저 -> 강의
+		FOREIGN KEY (
+			`MNO` -- 매니저번호
+		)
+		REFERENCES `MY_SCHEMA`.`MGR` ( -- 매니저
+			`MNO` -- 매니저번호
+		);
+
+-- 학생
+ALTER TABLE `MY_SCHEMA`.`STUD`
+	ADD CONSTRAINT `FK_MEMB_TO_STUD` -- 회원 -> 학생
+		FOREIGN KEY (
+			`MNO` -- 학생번호
+		)
+		REFERENCES `MY_SCHEMA`.`MEMB` ( -- 회원
+			`MNO` -- 회원번호
+		);
+
+-- 강사
+ALTER TABLE `MY_SCHEMA`.`TCHER`
+	ADD CONSTRAINT `FK_MEMB_TO_TCHER` -- 회원 -> 강사
+		FOREIGN KEY (
+			`MNO` -- 강사번호
+		)
+		REFERENCES `MY_SCHEMA`.`MEMB` ( -- 회원
+			`MNO` -- 회원번호
+		);
+
+-- 매니저
+ALTER TABLE `MY_SCHEMA`.`MGR`
+	ADD CONSTRAINT `FK_MEMB_TO_MGR` -- 회원 -> 매니저
+		FOREIGN KEY (
+			`MNO` -- 매니저번호
+		)
+		REFERENCES `MY_SCHEMA`.`MEMB` ( -- 회원
+			`MNO` -- 회원번호
+		);
+
+-- 게시판
+ALTER TABLE `MY_SCHEMA`.`BOARD`
+	ADD CONSTRAINT `FK_MEMB_TO_BOARD` -- 회원 -> 게시판
+		FOREIGN KEY (
+			`MNO` -- 회원번호
+		)
+		REFERENCES `MY_SCHEMA`.`MEMB` ( -- 회원
+			`MNO` -- 회원번호
+		);
+
+-- 자료실
+ALTER TABLE `MY_SCHEMA`.`FBOARD`
+	ADD CONSTRAINT `FK_MEMB_TO_FBOARD` -- 회원 -> 자료실
+		FOREIGN KEY (
+			`MNO` -- 회원번호
+		)
+		REFERENCES `MY_SCHEMA`.`MEMB` ( -- 회원
+			`MNO` -- 회원번호
+		);
+
+-- QnA
+ALTER TABLE `MY_SCHEMA`.`QNA`
+	ADD CONSTRAINT `FK_MEMB_TO_QNA` -- 회원 -> QnA
+		FOREIGN KEY (
+			`MNO` -- 회원번호
+		)
+		REFERENCES `MY_SCHEMA`.`MEMB` ( -- 회원
+			`MNO` -- 회원번호
+		);
+
+-- 교실사진
+ALTER TABLE `MY_SCHEMA`.`CR_PIC`
+	ADD CONSTRAINT `FK_CROOM_TO_CR_PIC` -- 교실 -> 교실사진
+		FOREIGN KEY (
+			`CRONO` -- 교실번호
+		)
+		REFERENCES `MY_SCHEMA`.`CROOM` ( -- 교실
+			`CRNO` -- 교실번호
+		);
+
+-- 교육과정과목
+ALTER TABLE `MY_SCHEMA`.`TABLE19`
+	ADD CONSTRAINT `FK_CURR_TO_TABLE19` -- 교육과정 -> 교육과정과목
+		FOREIGN KEY (
+			`EDU_NO` -- 교육과정번호
+		)
+		REFERENCES `MY_SCHEMA`.`CURR` ( -- 교육과정
+			`EDU_NO` -- 교육과정번호
+		);
+
+-- 교육과정과목
+ALTER TABLE `MY_SCHEMA`.`TABLE19`
+	ADD CONSTRAINT `FK_SUBJ_TO_TABLE19` -- 과목 -> 교육과정과목
+		FOREIGN KEY (
+			`SBNO` -- 과목번호
+		)
+		REFERENCES `MY_SCHEMA`.`SUBJ` ( -- 과목
+			`SBNO` -- 과목번호
+		);
+
+-- 강의수강생
+ALTER TABLE `MY_SCHEMA`.`LECT_STUD`
+	ADD CONSTRAINT `FK_LECT_TO_LECT_STUD` -- 강의 -> 강의수강생
+		FOREIGN KEY (
+			`LNO` -- 강의번호
+		)
+		REFERENCES `MY_SCHEMA`.`LECT` ( -- 강의
+			`LNO` -- 강의번호
+		);
+
+-- 강의수강생
+ALTER TABLE `MY_SCHEMA`.`LECT_STUD`
+	ADD CONSTRAINT `FK_STUD_TO_LECT_STUD` -- 학생 -> 강의수강생
+		FOREIGN KEY (
+			`MNO` -- 학생번호
+		)
+		REFERENCES `MY_SCHEMA`.`STUD` ( -- 학생
+			`MNO` -- 학생번호
+		);
+
+-- 강의배정
+ALTER TABLE `MY_SCHEMA`.`LECT_TCHER`
+	ADD CONSTRAINT `FK_TCHER_TO_LECT_TCHER` -- 강사 -> 강의배정
+		FOREIGN KEY (
+			`MNO` -- 강사번호
+		)
+		REFERENCES `MY_SCHEMA`.`TCHER` ( -- 강사
+			`MNO` -- 강사번호
+		);
+
+-- 강의배정
+ALTER TABLE `MY_SCHEMA`.`LECT_TCHER`
+	ADD CONSTRAINT `FK_LECT_TO_LECT_TCHER` -- 강의 -> 강의배정
+		FOREIGN KEY (
+			`LNO` -- 강의번호
+		)
+		REFERENCES `MY_SCHEMA`.`LECT` ( -- 강의
+			`LNO` -- 강의번호
+		);
+
+-- 회원
+ALTER TABLE `MY_SCHEMA`.`MEMB`
+	ADD CONSTRAINT `FK_ADDR_TO_MEMB` -- 주소 -> 회원
+		FOREIGN KEY (
+			`ARNO` -- 주소번호
+		)
+		REFERENCES `MY_SCHEMA`.`ADDR` ( -- 주소
+			`ARNO` -- 주소번호
+		);

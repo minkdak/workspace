@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- WEB-INF 폴더 밑에 conf 폴더 만들고, 그 밑에 이파일 두고 
+       자동으로 생성할 클래스의 패키지를 지정한다.
+       자동으로 객체를 생성하려면 그 클래스에 @Component  애노테이션이 붙어있어야 한다.-->
+  <context:component-scan base-package="bitcamp.java93"/> <!-- 컴포넌트 자동 스캔 -->
+
+  <context:property-placeholder location="bitcamp/java93/jdbc.properties"/>
+  <!-- DB의 커넥션 풀을 관리하는 객체이다. -->
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="${jdbc.dirverClassName}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+  </bean>
+  
+  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+  
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="typeAliasesPackage" value="bitcamp.java93.domain"/>
+    <property name="mapperLocations" value="classpath*:step28/ex6/*Dao.xml"/>
+  </bean>
+
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+  <property name="basePackage" value="step28.ex6" />
+  </bean>
+  
+</beans>

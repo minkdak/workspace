@@ -1,0 +1,30 @@
+
+<!--DOM API 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>TITLE</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <button id="btn1" type="button">버튼1</button>
+  <button id="btn2" type="button">버튼2</button>
+
+<script>
+
+var btn1= document.querySelector("#btn1")
+var btn1Click = function() {
+  console.log('11111')
+}
+btn1.addEventListener('click', btn1Click);
+
+btn2.onclick = function() {// DOM API에 약속이 되어있는 onclick
+  btn1.removeEventListener('click', btn1Click)
+}
+
+</script>
+</body>
+</html>

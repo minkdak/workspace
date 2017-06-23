@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>계산기</title>
+  <style>
+  .btn{
+    display: inline-block; /* 너비는 같되 라인을 공유하는 구조 */
+    border: 1px solid gray;
+    box-sizing: border-box;
+    width: 70px;
+    height: 70px;
+    padding: 5px 5px 0px 5px;
+    margin: 5px 5px 0px 0px;
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+
+  }
+  .container {
+    border: 1px solid gray;
+    width: 300px;
+    padding: 10px 5px 10px 10px;
+  }
+  #display {
+    border: 1px solid gray;
+    height: 40px;
+    width: 283px;
+    font-size: 40px;
+    padding: 5px;
+    text-align: right;
+    font-weight: bold;
+  }
+
+  #btn0 {
+    width: 145px
+  }
+
+  </style>
+</head>
+<body>
+<div class='container'>
+  <div id='display'>123</div>
+  <div class='btn'>AC</div
+  ><div class='btn '>&nbsp;</div
+  ><div class='btn'>&nbsp;</div
+  ><div class='btn'>/</div
+  ><div class='btn number'>7</div
+  ><div class='btn number'>8</div
+  ><div class='btn number'>9</div
+  ><div class='btn '>X</div
+  ><div class='btn number'>4</div
+  ><div class='btn number'>5</div
+  ><div class='btn number'>6</div
+  ><div class='btn'>-</div
+  ><div class='btn number'>1</div
+  ><div class='btn number'>2</div
+  ><div class='btn number'>3</div
+  ><div class='btn'>+</div
+  ><div class='btn number' id='btn0'>0</div
+  ><div class='btn'>&nbsp;</div
+  ><div class='btn'>=</div>
+
+</div>
+<script>
+var btnList = document.querySelectorAll('.number')
+//쿼리가 리턴 ㅎ
+// for (var i of ) 사용할 수 없음.
+for (var i = 0; i < btnList.length; i++ ) {
+  btnList[i].onclick = onClickNumber; // 함수의 주소를 저장하므로 파라미터 표시 X
+    // console.log(i)
+    // console.log(this) // 버튼의 주소를 가지고 있다.
+    // console.log(event.target) // 이벤트 객체를 통해 이벤트가발생된 태그의 정보를얻음 상동.
+// (inner 함수)함수안에 있는 함수가 바깥 변수를 사용하고,
+// 사라질 변수라면 자체 메모리에 저장 -> 클로저.
+//
+// 이너함수를 클로저라도 부르더라도 맞다.
+// 이너함수가 자체적으로 갖는 메모리도 클로저.
+
+}
+
+function onClickNumber(event) { // 위에 함수가 계속 호출
+  console.log(this)
+  console.log(event.target)
+}
+
+</script>
+</body>
+
+</html>

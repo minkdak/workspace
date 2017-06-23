@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>계산기</title>
+  <style>
+  .btn{
+    display: inline-block; /* 너비는 같되 라인을 공유하는 구조 */
+    border: 1px solid gray;
+    box-sizing: border-box;
+    width: 70px;
+    height: 70px;
+    padding: 5px 5px 0px 5px;
+    margin: 5px 5px 0px 0px;
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+
+  }
+  .container {
+    border: 1px solid gray;
+    width: 300px;
+    padding: 10px 5px 10px 10px;
+  }
+  #display {
+    border: 1px solid gray;
+    height: 40px;
+    width: 283px;
+    font-size: 40px;
+    padding: 5px;
+    text-align: right;
+    font-weight: bold;
+  }
+
+  #btn0 {
+    width: 145px
+  }
+
+  </style>
+</head>
+<body>
+<div class='container'>
+  <div id='display'>123</div>
+  <div class='btn'>AC</div
+  ><div class='btn '>&nbsp;</div
+  ><div class='btn'>&nbsp;</div
+  ><div class='btn operator'>/</div
+  ><div class='btn number'>7</div
+  ><div class='btn number'>8</div
+  ><div class='btn number'>9</div
+  ><div class='btn operator'>X</div
+  ><div class='btn number'>4</div
+  ><div class='btn number'>5</div
+  ><div class='btn number'>6</div
+  ><div class='btn operator'>-</div
+  ><div class='btn number'>1</div
+  ><div class='btn number'>2</div
+  ><div class='btn number'>3</div
+  ><div class='btn operator'>+</div
+  ><div class='btn number' id='btn0'>0</div
+  ><div class='btn'>&nbsp;</div
+  ><div class='btn operator'>=</div>
+
+</div>
+<script>
+var btnList = document.querySelectorAll('.number')
+//쿼리가 리턴 ㅎ
+// for (var i of ) 사용할 수 없음.
+for (var i = 0; i < btnList.length; i++ ) {
+  btnList[i].onclick = onClickNumber;
+
+}
+
+function onClickNumber(event) {
+  console.log(this)
+}
+
+
+var opList = document.querySelectorAll('.operator')
+for (var e of opList) {
+  e.onclick = onClickOperator;
+}
+
+function onClickOperator() {
+  console.log(this)
+}
+
+// onClickOperator();
+// window. 생략, window 는 onclickoperator 함수에 넘어가고 this는 window를담는다.
+// 브라우저 안에서 실행되는 모든 함수와 객체는 window에 포함되어있음(node js와는 별개)
+
+
+</script>
+</body>
+
+</html>

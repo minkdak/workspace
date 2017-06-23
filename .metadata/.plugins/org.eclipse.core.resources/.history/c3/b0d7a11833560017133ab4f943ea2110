@@ -1,0 +1,14 @@
+package step27.ex4;
+
+import java.beans.PropertyEditorSupport;
+
+// 인터페이스를 직접 구현하는 대신, PropertyEditorSupport를 상속 받는다.
+// public class CustomDateEditor implements PropertyEditor { ㄴㄴ
+public class CustomDateEditor extends PropertyEditorSupport {
+  
+  @Override
+  public void setAsText(String text) throws IllegalArgumentException {
+    
+  }
+
+}

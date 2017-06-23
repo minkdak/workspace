@@ -1,0 +1,7 @@
+package step28.ex5;
+
+import org.springframework.beans.factory.FactoryBean;
+
+public class SqlSessionFactoryFactoryBean implements FactoryBean{
+  
+}

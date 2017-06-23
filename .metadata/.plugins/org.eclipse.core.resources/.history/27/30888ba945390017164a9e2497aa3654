@@ -1,0 +1,26 @@
+/* 캡슐화(encapsulation): 중첩 클래스(nested class)에 붙일 수 있는 modifier 종류
+ * => 클래스 안에 선언된 클래스를 "중첩 클래스(nested class)"라고 부른다.
+ *    또는 "내부 클래스(inner class)"라고도 부른다.
+ * => inner 클래스도 클래스 안에 선언되기 때문에,
+ *    바깥 클래스의 멤버이다.
+ *    따라서 클래스의 다른 멤버인 변수나 메서드와 똑같이 modifier를 사용할 수 있다.
+ */
+package step11;
+
+public class Test08 { // 이렇게 가장 바깥 쪽 클래스를 "패키지 멤버 클래스"라 부른다.
+  
+  private class Inner1 {} // 클래스 안에 선언된 클래스를 inner 클래스라 부른다.
+  class Inner2 {}
+  protected class Inner3 {}
+  public class Inner4 {}
+  
+  public static void main(String[] args){
+    // public 클래스는 다른 패키지에서 접근할 수 있다.
+    step11.ex1.A obj1 = new step11.ex1.A();
+    
+    // (default) 클래스는 같은 패키지에서만 접근할 수 있다.
+    // => Test07은 B 클래스와 다른 패키지에 있기 때문에 접근 불가능!
+    // step11.ex1.B obj2 = new step11.ex1.B(); // 컴파일 오류!
+  }
+  
+}

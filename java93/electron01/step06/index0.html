@@ -1,0 +1,118 @@
+<!-- AJAX 사용법 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+  .container {
+    width: 600px;
+    margin: 0px auto;
+  }
+  </style>
+</head>
+<body>
+<div class="container">
+<h1>학생 목록</h1>
+<table id="student-tbl" class="table table-hover">
+<thead>
+  <tr>
+    <th>번호</th>
+    <th>이름</th>
+    <th>전화</th>
+    <th>이메일</th>
+    <th>재직여부</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+<button type="button" class="btn btn-primary" id="prev-btn">이전</button>
+<span id="page-no">1</span>
+<button type="button" class="btn btn-primary" id="next-btn">다음</button>
+<button type="button" class="btn btn-primary" id="add-btn">추가</button>
+</div>
+
+<script>window.$ = window.jQuery = require('jquery')</script>
+<script>
+const mysql = require('mysql')
+const connection = mysql.createConnection({
+  database: 'webappdb',
+  user: 'webapp',
+  password: '1111'
+})
+connection.connect()
+</script>
+<script>
+"use strict"
+/* AJAX 응용 II
+=> 학생 목록 출력
+*/
+var tbody = $('#student-tbl > tbody')
+    // addBtn = $('#add-btn'); ==> 한번밖에 안쓰니까 굳이 변수 선언할 필요없다.
+
+/*
+select m.mno, m.name, m.tel, m.email, s.work
+from stud s inner join memb m on s.sno=m.mno
+order by m.mno asc
+limit 0, 5
+*/
+
+listStudent(1)
+
+function onClickViewLink(event) {
+  location.href = 'view.html?no=' + $(this).attr('data-no')
+  event.preventDefault()
+}
+
+$('#add-btn').click(function() {
+  location.href = 'view.html'
+})
+
+$('#prev-btn').click(function() {
+  var currPageNo = parseInt($('#page-no').text()
+  listStudent(currPageNo - 1)
+})
+
+$('#next-btn').click(function() {
+  var currPageNo = parseInt($('#page-no').text()
+  listStudent(currPageNo + 1)
+  // alert($('#page-no').text() + 1)// 현재 페이지의 no. 찾음
+  //$('#page-no') 배열
+  // 0번째 태그의
+})
+
+function listStudent(pageNo) {
+  connection.query(
+    'select m.mno, m.name, m.tel, m.email, s.work \
+    from stud s inner join memb m on s.sno=m.mno  \
+    order by m.mno asc \
+    limit 0, 3' + pageNo * 3 + ', 3',
+    function(error, results) {
+      if (error) {
+        alert('데이터 조회 중 발생!')
+        throw error;
+      }
+
+      tbody.html('');
+      for (var s of results) {
+        $("<tr>").html("<td>" + s.mno +
+        "</td><td><a href='#' data-no='" + s.mno + "' class='view-link'>" + s.name +
+        "</a></td><td>" + s.tel +
+        "</td><td>" + s.email +
+        "</td><td>" + (s.work == "Y" ? "재직중" : "실업") + "</td>")
+        .appendTo(tbody)
+      }
+      $('table .view-link').click(onClickViewLink)
+      $('#page-no').text(pageNo)
+    })
+}
+
+</script>
+</body>
+</html>
+
+
+<!-- -->

@@ -1,0 +1,154 @@
+package step28.ex2;
+/* 역할:
+ * => memb 테이블의 데이터를 다루는 메서드를 모아둔 클래스이다.
+ * => 출력하는 역할은 호출자에게 맡긴다.
+ * => DAO의 역할은 결과를 리턴하면 된다.
+ * => 커넥션은 DBConnectionPool로부터 얻어서 사용하고,
+ *    사용한 후에는 반납한다.
+ */
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MemberDaoImpl implements MemberDao{
+  SqlSessionFactory sqlSessionFactory;
+    
+  public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+    this.sqlSessionFactory = sqlSessionFactory;
+  }
+  public List<Member> selectList(int pageNo, int pageSize) throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+    HashMap<String, Object> valueMap = new HashMap<>();
+    valueMap.put("startIndex", (pageNo - 1) * pageSize);
+    valueMap.put("pageSize", pageSize);
+    System.out.println(valueMap);
+    return sqlSession.selectList("step28.ex2.MemberDao.selectList", valueMap);
+    } finally {
+      sqlSession.close();
+    }
+  }
+  
+  public Member selectOne(int no) throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    try {
+      // SqlSession.selectOne()을 실행할 때는 반드시 결과를 한 개만 만드는 select문을 지정해야 한다.
+      return sqlSession.selectOne("step28.ex2.MemberDao.selectOne", no);
+    } finally {
+      sqlSession.close();
+    }
+  /*
+    Connection con = conPool.getConnection();
+    
+    try ( 
+        PreparedStatement stmt = con.prepareStatement(
+            "select mno, name, tel, email from memb where mno=?");) {
+      
+        stmt.setInt(1, no);
+        
+        try (ResultSet rs = stmt.executeQuery();) {
+        
+        if (!rs.next())  
+          return null;
+          
+        Member member = new Member();
+        member.setNo(rs.getInt("mno")); 
+        member.setName(rs.getString("name")); 
+        member.setTel(rs.getString("tel"));
+        member.setEmail(rs.getString("email"));
+        return member;
+
+        }
+      } finally {
+        conPool.returnConnection(con);
+      }
+*/
+  }
+  
+  public Member selectOneByEmailPassword(String email, String password) throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    try {
+      HashMap<String, Object> valueMap = new HashMap<>();
+      valueMap.put("email", email);
+      valueMap.put("password", password);
+      return sqlSession.selectOne("step28.ex2.MemberDao.selectOneByEmailPassword", valueMap);
+    } finally {
+      sqlSession.close();
+    }
+  }
+  public int insert(Member member) throws Exception{
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    try {
+      return sqlSession.insert("step28.ex2.MemberDao.insert", member);
+    } finally {
+      sqlSession.close();
+    }
+    /*
+    Connection con = conPool.getConnection();
+    try (
+        PreparedStatement stmt = con.prepareStatement(
+            "insert into memb(name,tel,email,pwd) values(?,?,?,password(?))",
+            Statement.RETURN_GENERATED_KEYS);) {
+      
+        stmt.setString(1, member.getName());
+        stmt.setString(2, member.getTel());
+        stmt.setString(3, member.getEmail());
+        stmt.setString(4, member.getPassword());
+        int count = stmt.executeUpdate();
+        
+        
+        try (ResultSet rs = stmt.getGeneratedKeys();) {
+        rs.next();
+        member.setNo(rs.getInt(1));
+        }
+        
+        return count;
+        } finally {  
+       conPool.returnConnection(con);
+    }
+    */return 0;
+  }
+  
+  public int delete(int no) throws Exception {
+    /*
+    Connection con = conPool.getConnection();
+    try (
+        PreparedStatement stmt = con.prepareStatement(
+            "delete from memb where mno=?");) {
+          stmt.setInt(1, no);
+          return stmt.executeUpdate();
+          // 데이터를 삭제할 넘버를 받아서 sql문에 인파라미터에 그 숫자를 적재하고 delete하고 delete된 갯수를 리턴한다.
+          
+        } finally {  
+          conPool.returnConnection(con);
+        }
+    */return 0;
+  }
+  
+  public int update(Member member) throws Exception {
+    /*
+    Connection con = conPool.getConnection();
+    try (
+        PreparedStatement stmt = con.prepareStatement(
+            "update memb set name=?, tel=?, email=?, pwd=password(?) where mno=?");) {
+        stmt.setString(1, member.getName());
+        stmt.setString(2, member.getTel());
+        stmt.setString(3, member.getEmail());
+        stmt.setString(4, member.getPassword());
+        stmt.setInt(5, member.getNo());
+                
+        return stmt.executeUpdate();
+
+        
+        } finally {  
+          conPool.returnConnection(con);
+        }
+       */return 0;
+  }  
+}

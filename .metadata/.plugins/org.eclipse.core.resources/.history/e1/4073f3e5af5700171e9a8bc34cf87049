@@ -1,0 +1,17 @@
+package step28.ex4;
+
+import java.sql.Date;
+import java.util.List;
+
+public class Project {
+  int no;
+  String title;
+  String content;
+  Date startDate;
+  Date endDate;
+  String photoPath;
+  List<Member> members; 
+  /* 이건 테이블에 없음. Project와 Member의 (Aggregation 관계를 포함한거다.
+   * 이렇게 하면 쿼리 두 번 날릴 것을 한 번으로 줄일 수 있다.
+   */
+}

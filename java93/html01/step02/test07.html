@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!DOCTYPE html> <!-- 이 문서가 어떤 형식인지 선언한다. HTML5규격-->
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+  <style>
+  h1,h2,h3,h4,h5,h6,p,div,a,strong,b,i,form {
+    border-style: solid;
+    border-color: red;
+    border-width: 1px;
+  }
+  #ta1 {
+    width: 200px;
+    height: 100px;
+  }
+
+  address {
+    display: inline;
+    font-style: normal
+  }
+  </style>
+</head>
+<body>
+<form action="http://www.naver.com" method="get">
+  재직여부:
+<select name="school">
+  <option>선택하세요</option>
+  <option>고졸</option>
+  <option selected>학사</option>
+  <option>석사</option>
+  <option>박사</option>
+</select><br>
+
+내용: <textarea id="ta1"
+                name="content"
+                placeholder="내용을 입력하세요"></textarea><br>
+자기소개: <textarea intro="intro" rows="4" cols="50">내 소개..</textarea><br>
+
+<button>제출버튼</button>
+<button type="submit">제출버튼</button>
+<button type="reset">리셋버튼튼</button>
+<button type="button">일반버튼</button><br>
+
+</form>
+</body>
+</html>
