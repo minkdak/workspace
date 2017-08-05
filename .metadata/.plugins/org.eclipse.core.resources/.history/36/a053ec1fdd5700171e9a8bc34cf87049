@@ -1,5 +1,0 @@
-#jdbc.properties
-dirverClassName=com.mysql.jdbc.Driver
-url=jdbc:mysql://localhost:3306/webappdb
-username=webapp
-password=1111

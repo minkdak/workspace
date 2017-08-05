@@ -4,14 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import bitcamp.java93.dao.MemberDao;
 import bitcamp.java93.dao.TeacherDao;
 import bitcamp.java93.domain.Teacher;
 import bitcamp.java93.service.TeacherService;
 
-@Component
+@Service
 public class TeacherServiceImpl implements TeacherService {
   @Autowired
   MemberDao memberDao;
@@ -37,6 +39,11 @@ public class TeacherServiceImpl implements TeacherService {
     return teacherDao.selectOneByEmailPassword(valueMap);
   }
   
+  @Override
+  public int getSize() throws Exception {
+    return teacherDao.countAll();
+  }
+  @Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
   public void add(Teacher teacher) throws Exception {
     memberDao.insert(teacher);
     teacherDao.insert(teacher);
@@ -44,13 +51,9 @@ public class TeacherServiceImpl implements TeacherService {
     this.insertPhoto(teacher.getNo(), teacher.getPhotoList());
     HashMap<String,Object> valueMap = new HashMap<>();
     valueMap.put("teacherNo", teacher.getNo());
-    
-    for (String photoPath : teacher.getPhotoList()) {
-      valueMap.put("photoPath", photoPath);
-      teacherDao.insertPhoto(valueMap);
-    }
   }
   
+  @Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
   public void update(Teacher teacher) throws Exception {
     int count = memberDao.update(teacher);
     if(count < 1) throw new Exception(teacher.getNo() + "번 회원을 찾을 수 없습니다.");
@@ -62,6 +65,7 @@ public class TeacherServiceImpl implements TeacherService {
     this.insertPhoto(teacher.getNo(), teacher.getPhotoList());
   }
   
+  @Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
   public void remove(int no) throws Exception {
     teacherDao.deletePhoto(no);
 
@@ -74,6 +78,9 @@ public class TeacherServiceImpl implements TeacherService {
   }
   
   public void insertPhoto(int teacherNo, List<String> photoPathList) {
+    if (photoPathList == null) 
+      return;
+    
     HashMap<String,Object> valueMap = new HashMap<>();
     valueMap.put("teacherNo", teacherNo);
     

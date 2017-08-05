@@ -1,0 +1,35 @@
+package minkdak;
+import java.io.File;
+import java.io.IOException;
+
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.lang.Rational;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.GpsDirectory;
+
+public class ExtractTags {
+  public static void main(String[] args) throws ImageProcessingException,
+  IOException {
+// TODO Auto-generated method stub
+File jpegFile = new File("aa.jpg");
+Metadata metadata = ImageMetadataReader.readMetadata(jpegFile);
+final GpsDirectory gpsDirectory = metadata
+.getDirectory(GpsDirectory.class);
+if (gpsDirectory instanceof GpsDirectory) {
+  final GpsDirectory gps = (GpsDirectory) gpsDirectory;
+  final Rational[] lat = gps
+    .getRationalArray(GpsDirectory.TAG_GPS_LATITUDE);
+  final double latitude = lat[0].doubleValue() + lat[1].doubleValue()
+    / 60 + lat[2].doubleValue() / 3600;
+  final Rational[] lng = gps
+    .getRationalArray(GpsDirectory.TAG_GPS_LONGITUDE);
+  final double longitude = lng[0].doubleValue()
+    + lng[1].doubleValue() / 60 + lng[2].doubleValue() / 3600;
+  System.out.println(latitude);
+  System.out.println(longitude);
+}
+}
+
+}
+}

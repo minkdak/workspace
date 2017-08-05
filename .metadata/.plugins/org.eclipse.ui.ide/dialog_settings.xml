@@ -10,6 +10,8 @@
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\bitcamp\git"/>
+			<item value="C:\workspace\springweb01"/>
 			<item value="C:\workspace\java93"/>
 			<item value="C:\workspace\java93\db01"/>
 		</list>

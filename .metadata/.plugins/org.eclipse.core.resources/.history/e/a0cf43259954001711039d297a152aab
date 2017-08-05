@@ -1,5 +1,0 @@
-package bitcamp.java93.control;
-
-public interface Controller {
-
-}

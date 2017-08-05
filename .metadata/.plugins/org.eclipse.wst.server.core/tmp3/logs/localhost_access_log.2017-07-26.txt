@@ -1,0 +1,11 @@
+127.0.0.1 - - [26/Jul/2017:10:23:42 +0900] "GET / HTTP/1.1" 404 1078
+0:0:0:0:0:0:0:1 - - [26/Jul/2017:10:23:46 +0900] "GET /project01-bit/teacher/list.do HTTP/1.1" 200 1366
+0:0:0:0:0:0:0:1 - - [26/Jul/2017:10:23:46 +0900] "GET /project01-bit/css/common.css HTTP/1.1" 200 503
+0:0:0:0:0:0:0:1 - - [26/Jul/2017:10:43:28 +0900] "GET /minkdak/mypage/mypage.html HTTP/1.1" 404 1104
+127.0.0.1 - - [26/Jul/2017:11:06:58 +0900] "GET / HTTP/1.1" 404 1078
+0:0:0:0:0:0:0:1 - - [26/Jul/2017:11:07:03 +0900] "GET /project01-bit/teacher/list.do HTTP/1.1" 200 1366
+0:0:0:0:0:0:0:1 - - [26/Jul/2017:11:07:03 +0900] "GET /project01-bit/css/common.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [26/Jul/2017:11:07:06 +0900] "GET /project01-bit/teacher/detail.do?no=39 HTTP/1.1" 200 1559
+0:0:0:0:0:0:0:1 - - [26/Jul/2017:11:07:06 +0900] "GET /project01-bit/teacher/photo/1498619708970_1 HTTP/1.1" 404 1121
+0:0:0:0:0:0:0:1 - - [26/Jul/2017:11:07:06 +0900] "GET /project01-bit/teacher/photo/1498619708972_2 HTTP/1.1" 404 1121
+0:0:0:0:0:0:0:1 - - [26/Jul/2017:11:23:50 +0900] "GET /minkdak/mypage/mypage.html HTTP/1.1" 404 1104

@@ -47,6 +47,12 @@
                       where email=#{email} and pwd=password(#{password})
   </select>
   
+  <select id="countAll" resultType="int">
+    select count(*)
+    from tcher t inner join memb m on t.tno=m.mno
+  </select>
+  
+  
   <!-- select 문이 아니기 때문에 resultType 속성을 추가하지 않는다 -->
   <insert id="insert" parameterType="teacher">
     insert into tcher(tno,hmpg,fcbk,twit)

@@ -1,0 +1,12 @@
+package travelstudio.service;
+
+
+
+
+
+import travelstudio.dao.Detail;
+
+public interface DetailService {
+  void sadd(Detail detail) throws Exception;
+//  int getSize() throws Exception;
+}

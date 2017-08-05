@@ -1,0 +1,11 @@
+package minkdak;
+
+import java.io.File;
+
+public class MetaData {
+
+    public static void main(String[] args) {
+      File file = new File("C:\\Users\\bitcamp\\Downloads\\baseball.jpg");
+
+    }
+}

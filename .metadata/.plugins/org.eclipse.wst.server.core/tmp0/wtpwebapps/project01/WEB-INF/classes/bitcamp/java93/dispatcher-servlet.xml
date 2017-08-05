@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+      
+  <!-- *.do 요청을 처리할 페이지 컨트롤러 생성 -->
+  <context:component-scan base-package="bitcamp.java93.control">
+    <context:exclude-filter type="annotation" 
+      expression="org.springframework.web.bind.annotation.RestController"/>
+  </context:component-scan>
+  
+  <!-- Spring WebMVC 관련 긴응을 처리할 객체를 등록한다. -->
+  <mvc:annotation-driven/>
+  
+  <!-- 설정 파일에서 사용할 정보를 담은 .properties 파일 로딩하기 -->
+  <context:property-placeholder location="classpath:bitcamp/java93/jdbc.properties"/>
+
+  <!-- DB 트랜잭션을 관리하는 객체이다.
+       Mybatis에서 관리하던 것을 스프링으로 옮겼다. -->
+  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+    
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="typeAliasesPackage" value="bitcamp.java93.domain"/>
+    <property name="mapperLocations" value="classpath*:bitcamp/java93/dao/*Dao.xml"/>
+  </bean>
+  
+  <!-- DAO 인터페이스의 구현체를 자동으로 생성할 객체 준비 -->
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="bitcamp.java93.dao"/>
+  </bean>
+  
+  <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+   <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+   <!-- <property name="prefix" value="/"/> -->
+   <property name="prefix" value="/WEB-INF/view/"/>
+   <property name="suffix" value=".jsp"/>
+  </bean>
+  
+  <bean id="multipartResolver"
+      class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+  <!-- 각 파일의 최대 크기(byte)를 지정할 수 있다. -->
+    <property name="maxUploadSize" value="10000000"/>
+  </bean>
+</beans>
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+package minkdak;
+
+public class MetaData {
+
+    public static void main(String[] args) {
+
+        ExtractTags extractAllTags = new ExtractTags();
+
+        //extractAllTags.getTags();
+        System.out.println("\n\n\n Has this ");
+        extractAllTags.getLatitude();     
+    }
+}

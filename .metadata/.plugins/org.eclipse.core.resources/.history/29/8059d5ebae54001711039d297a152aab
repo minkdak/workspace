@@ -1,5 +1,0 @@
-package bitcamp.java93.annotation;
-
-public @interface Component {
-
-}

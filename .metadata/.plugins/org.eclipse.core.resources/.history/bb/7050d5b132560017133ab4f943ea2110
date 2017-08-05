@@ -1,8 +1,0 @@
-package step27.ex4;
-
-import java.beans.PropertyEditor;
-import java.beans.PropertyEditorSupport;
-
-public class CustomDateEditor extends PropertyEditorSupport {
-
-}

@@ -1,8 +1,0 @@
-package step28.ex1;
-
-public class Test01 {
-  public static void main(String[] args) {
-    MemberDaoImpl memberDao = new MemberDaoImpl();
-    
-  }
-}

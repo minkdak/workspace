@@ -1,0 +1,8 @@
+127.0.0.1 - - [25/Jul/2017:12:22:04 +0900] "GET / HTTP/1.1" 404 1078
+0:0:0:0:0:0:0:1 - - [25/Jul/2017:12:24:05 +0900] "GET /minkdak/notice/list HTTP/1.1" 404 1097
+0:0:0:0:0:0:0:1 - - [25/Jul/2017:12:24:05 +0900] "GET /favicon.ico HTTP/1.1" 404 1089
+0:0:0:0:0:0:0:1 - - [25/Jul/2017:12:24:12 +0900] "GET /minkdak/notice/list.son HTTP/1.1" 404 1101
+0:0:0:0:0:0:0:1 - - [25/Jul/2017:12:24:15 +0900] "GET /minkdak/notice/list.json HTTP/1.1" 404 1102
+0:0:0:0:0:0:0:1 - - [25/Jul/2017:12:26:33 +0900] "GET /minkdak/travelstudio/notice/list.json HTTP/1.1" 404 1115
+0:0:0:0:0:0:0:1 - - [25/Jul/2017:12:28:00 +0900] "GET /minkdak/travelstudio/notice/list.json HTTP/1.1" 404 1115
+127.0.0.1 - - [25/Jul/2017:12:28:25 +0900] "GET / HTTP/1.1" 404 1078

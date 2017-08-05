@@ -15,10 +15,10 @@ public interface TeacherDao {
   Teacher selectOne(int no) throws Exception ;
   
   Teacher selectOneByEmailPassword(Map<String,Object> valueMap);  
+  int countAll();
   int insert(Teacher teacher);
   
   void insertPhoto(Map<String,Object> valueMap); 
-  
   int delete(int no);
   
   int update(Teacher teacher);  
