@@ -16,30 +16,61 @@
     <result column="capt" property="capt"/>
     <result column="detail" property="detail"/>
     <result column="ispublic" property="ispublic"/>
-        <result column="mno" property="mno"/>
+        <result column="mno" property="no"/>
   </resultMap> 
 
-   <sql id="select1">
-    select *
-    from post
-  </sql> 
 
-  <select id="selectList" resultMap="postMap" parameterType="map">
-    <include refid="select1"/>
+    <select id="info1" resultMap="postMap" parameterType="String">
+    select * from post natural join member where postno=#{number}
+  </select>
+    
+    
+    
+<insert id="insert" parameterType="post" useGeneratedKeys="true" keyColumn="postno" >
+    insert into post(postno, title, sdt, edt, cont, pdt, mno) 
+    values(null, #{title}, #{sdt},#{edt},#{cont},'2017-07-07',#{no})
+    
+    <selectKey keyProperty="postno" resultType="int">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+  
+  <select id="selectOne" resultMap="postMap" parameterType="String">
+    select * 
+    from post natural join member where postno=#{postno}
   <!--   <if test="search != null">
-	    <where>
-	      <choose>
-		      <when test="search == 'email'">email = #{value}</when>
-		     </choose>
-	    </where>
+      <where>
+        <choose>
+          <when test="search == 'email'">email = #{value}</when>
+         </choose>
+      </where>
     </if>    
     order by name asc 
     limit #{startIndex}, #{pageSize} -->
   </select>
+   <select id="selectList" resultMap="postMap" parameterType="map">
+    select * from post natural join member order by postno desc
+  </select> 
   
   <select id="getWriteCount" resultMap="postMap" parameterType="map">
-  	select count(*) from post where mno=#{mno}
+    select count(*) from post where mno=#{no}
   </select>
+  <!--   <if test="search != null">
+      <where>
+        <choose>
+          <when test="search == 'email'">email = #{value}</when>
+         </choose>
+      </where>
+    </if>    
+    order by name asc 
+    limit #{startIndex}, #{pageSize} -->
+
+  <!--  
+  <select id="getWriteCount" resultMap="postMap" parameterType="map">
+    select count(*) from post where mno=#{mno}
+  </select>
+  -->
   <!-- 
   <select id="selectListByNames" resultMap="memberMap" parameterType="map">
     <include refid="select1"/>

@@ -8,7 +8,7 @@ package travelstudio.domain;
  */
 
 
-public class Post {
+public class Post extends Member{
   int postno;
   String title;
   String badge;
@@ -20,7 +20,15 @@ public class Post {
   String capt;
   String detail;
   String ispublic;
-  int mno;
+//  int mno;
+  
+  
+  @Override
+  public String toString() {
+    return "Post [postno=" + postno + ", title=" + title + ", badge=" + badge + ", tag=" + tag + ", sdt=" + sdt
+        + ", edt=" + edt + ", pdt=" + pdt + ", cont=" + cont + ", capt=" + capt + ", detail=" + detail + ", ispublic="
+        + ispublic + "]";
+  }
   public int getPostno() {
     return postno;
   }
@@ -87,19 +95,8 @@ public class Post {
   public void setIspublic(String ispublic) {
     this.ispublic = ispublic;
   }
-  public int getMno() {
-    return mno;
-  }
-  public void setMno(int mno) {
-    this.mno = mno;
-  }
+
   
-  @Override
-  public String toString() {
-    return "Post [postno=" + postno + ", title=" + title + ", badge=" + badge + ", tag=" + tag + ", sdt=" + sdt
-        + ", edt=" + edt + ", pdt=" + pdt + ", cont=" + cont + ", capt=" + capt + ", detail=" + detail + ", ispublic="
-        + ispublic + ", mno=" + mno + "]";
-  }
-  
+
   
 }

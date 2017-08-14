@@ -12,6 +12,7 @@
     <result column="lati" property="lati"/>
     <result column="longit" property="longit"/>
     <result column="time" property="time"/>
+    <result column="sno" property="sortno"/>
   </resultMap> 
 
 <!--    <sql id="select1">
@@ -21,13 +22,17 @@
    -->
   <insert id="insert" parameterType="picture" 
           useGeneratedKeys="true" keyColumn="picno">
-    insert into pic(path, lati, longit, time)
-    values(#{path}, #{lati}, #{longit}, #{time})
+    insert into pic(path, lati, longit, time, sno)
+    values(#{path}, #{lati}, #{longit}, #{time}, #{sortno})
   </insert>
   
   <select id="selectPicNo" resultMap="pictureMap" parameterType="String">
   	select picno from pic where path=#{path}
   </select>
+  
+<!--   <select id="selectPicture" resultMap="pictureMap" parameterType="String">
+    select picno from pic where path=#{path}
+  </select> -->
   
  <!--  <select id="selectList" resultMap="postMap" parameterType="map">
     <include refid="select1"/>

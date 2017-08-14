@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
-<fullyQualifiedTypeName name="java.net.URLEncoder"/>
 <fullyQualifiedTypeName name="java.net.URLDecoder"/>
 <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 <fullyQualifiedTypeName name="bitcamp.java93.dao.MemberDao"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="com.drew.imaging.ImageMetadataReader"/>
 <fullyQualifiedTypeName name="com.drew.metadata.Tag"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="java.lang.NullPointerException"/>
+<fullyQualifiedTypeName name="com.drew.imaging.jpeg.JpegMetadataReader"/>
 </qualifiedTypeNameHistroy>

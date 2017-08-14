@@ -23,7 +23,7 @@
 		<a href="../main_minkdak/main.html"><img id="logo"
 			src="./pictures/ourlogo.png"></a>
 		<p id="title_of_article">여행기 제목</p>
-		<button type="button" id="start-my-journey">여행기 작성</button>
+		<button type="button" id="start-my-journey">저장하기</button>
 	</header>
 
 	<div id="modal"></div>
@@ -32,7 +32,7 @@
 			<a href="javascript:title_file_browse()"><div>
 					<span><i id="icons_i" class="fa fa-picture-o fa-3x"
 						aria-hidden="true"></i></span><br> <span class="title_hidden">표지사진</span><input
-						id="title_fileupload" type="file" style="display: none"></input>
+						id="title_fileupload" type="file" name="files" style="display: none"></input>
 				</div></a><br> <a href="#"><div>
 					<span><i id="icons_i" class="fa fa-lock fa-3x"
 						aria-hidden="true"></i></span><br> <span class="title_hidden">모두에게
@@ -57,11 +57,16 @@
 
 	</div>
 	<div class="header" id="header"></div>
-	<div class="all_photo_select">
-		<i class="fa fa-picture-o fa-2x" aria-hidden="true"></i><a
-			class="help_btn" href="#" onclick="test1('modal')"> <i
-			class="fa fa-object-group fa-2x" aria-hidden="true"></i></a>
-	</div>
+	
+	
+  <div class="all_photo_select">
+    <a href="javascript:file_browse_none()" id="fileAllup"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></a>
+    <input type="file" id="fileAllUpload" name="files" style="display:none" multiple></input>
+    
+    <a class="help_btn" href="#" onclick="test1('modal')"> <i
+      class="fa fa-object-group fa-2x" aria-hidden="true"></i></a>
+  </div>
+  
 	<div class="container_main">
 		<div class="day_list">
 			<div class="day1" onmouseover="onfocus1(ab);"
@@ -338,8 +343,8 @@
 	<script src="./write.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script
-		src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDEsgodbW4NrW5grQitDfklBBZhS9hicSY"></script>
+	  <script type="text/javascript" src="https://maps.googleapis.
+com/maps/api/js?key=AIzaSyAvJO_nbwEqokghhsnj7oj_uQPgnjFoa84&libraries=visualization&sensor=false, places"></script>
 	<script>
   // 텍스트상자 크기 자동조절
   function cmaTextareaSize(obj, bsize) { // 객체명, 기본사이즈
@@ -375,6 +380,11 @@ function file_browse(a){
 function title_file_browse(){
 	$('#title_fileupload').click()
 }
+
+function file_browse_none(){
+    $('#fileAllup').click()
+    $('#fileAllUpload').click();
+  }
 
 function test1(idMyDiv) {
   var objDiv = document.getElementById(idMyDiv);
@@ -434,6 +444,8 @@ console.log(count)
         $('#write_addition').css('display', "none");
 
 
+        
+        
       }
 
 			function resize(obj) {
@@ -498,6 +510,11 @@ $(cc).css("display","none")
 
 			google.maps.event.addListener(map, 'click', function(event) {
 				placeMarker(event.latLng);
+			 mapProp = {
+						center : myCenter,
+						zoom : 2,
+						mapTypeId : google.maps.MapTypeId.ROADMAP
+					};
 			});
 		}
 
@@ -513,14 +530,16 @@ $(cc).css("display","none")
 			infowindow.open(map, marker);
 		}
 		$( function() {
-		    $( "#datepicker" ).datepicker({
-		      showButtonPanel: true
+		    $("#datepicker").datepicker({
+		      showButtonPanel: true,
+		      dateFormat:'yy/mm/dd'
 		    });
 		  } );
 		
 		$( function() {
-		    $( "#datepicker1" ).datepicker({
-		      showButtonPanel: true
+		    $("#datepicker1").datepicker({
+		      showButtonPanel: true,
+		      dateFormat:'yy/mm/dd'
 		    });
 		  } );
 		google.maps.event.addDomListener(window, 'load', initialize);

@@ -16,9 +16,8 @@ import com.drew.metadata.exif.GpsDirectory;
 public class DicaMetaData {
  public static void main(String [] args) throws ImageProcessingException, IOException{
   
- File file = new File("C:\\Users\\bitcamp\\Downloads\\baseball.jpg");
+ File file = new File("C:\\Users\\bitcamp\\DeskTop\\333.jpg");
 // file.createNewFile();
- 
 // FileOutputStream fos = new FileOutputStream(file);
 // fos.close();
  
@@ -27,19 +26,20 @@ public class DicaMetaData {
 
   
   Metadata metadata = ImageMetadataReader.readMetadata(file);
-  ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
-  Date date = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
-  System.out.println(date);
-  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-  String strNow2 = sdf.format(date);
-  System.out.println(strNow2);
-  
-  
-  GpsDirectory gpsDirectory = metadata.getFirstDirectoryOfType(GpsDirectory.class);
-  
-  System.out.println(gpsDirectory.getGeoLocation());
-//    System.out.println(metadata.getDirectories().getClass().toString());
-  System.out.println(gpsDirectory.getGeoLocation().getLongitude());
+//  JpegMeta
+//  ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
+//  Date date = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
+//  System.out.println(date);
+//  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//  String strNow2 = sdf.format(date);
+//  System.out.println(strNow2);
+//  
+//  
+//  GpsDirectory gpsDirectory = metadata.getFirstDirectoryOfType(GpsDirectory.class);
+//  
+//  System.out.println(gpsDirectory.getGeoLocation());
+////    System.out.println(metadata.getDirectories().getClass().toString());
+//  System.out.println(gpsDirectory.getGeoLocation().getLongitude());
   
   
     
@@ -69,6 +69,7 @@ public class DicaMetaData {
 
 
   for (Directory directory1 : metadata.getDirectories()) {
+    System.out.println(directory1.getTags());
       for (Tag tag : directory1.getTags()) {
           System.out.format("[%s] - %s = %s\n",
               directory1.getName(), tag.getTagName(), tag.getDescription());

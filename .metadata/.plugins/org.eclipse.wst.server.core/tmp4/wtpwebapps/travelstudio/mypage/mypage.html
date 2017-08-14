@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Hello World!</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
@@ -43,7 +43,7 @@ body, table, div, p, textarea {font-family:'Nanum Gothic';}
     <div id="profile">
       <div style="margin-left:40px;">
       <div class="profile_photo">
-        <img src="./usercircle.png"></img>
+        <img id="user-img"></img>
       </div>
       <div class="profile_desc">
         <div class="user_desc">
@@ -76,7 +76,7 @@ body, table, div, p, textarea {font-family:'Nanum Gothic';}
 <div class="cont_card">
   <div class="inner_card">
   <ul class="travle_list">
-    <li class="travel_item">
+<!--     <li class="travel_item">
       <div class="item_card">
         <div><i id="lock" class="fa fa-lock fa-2x" aria-hidden="true"></i></div>
       <div class="img_card">
@@ -149,8 +149,7 @@ body, table, div, p, textarea {font-family:'Nanum Gothic';}
   </div>
       </div>
     </div>
-    </li>
-
+    </li> 
 
 
     <li class="travel_item">
@@ -189,6 +188,51 @@ body, table, div, p, textarea {font-family:'Nanum Gothic';}
       </div>
     </div>
     </li>
+-->
+
+
+
+            <script id="content-template" type="text/x-handlebars-template">
+{{#each list}}
+            <li class="travel_item">
+              <div class="item_card">
+                <div><i id="lock" class="fa fa-lock fa-2x" aria-hidden="true"></i></div>
+              <div class="img_card">
+                <a href="../mypage/inner_article.html?postno={{postno}}">
+                  <img class="list_img" src="../{{cont}}"></img>
+                </a>
+              </div>
+              <div class="card_desc">
+        <div class="card_title">
+          <div class="list_title"><a href="#">{{title}}</a></div>
+          <div class="cate">
+              <nav>
+              <a class="dropdown-toggle" href="javascript:;" title="Menu"><i class="fa fa-align-justify" aria-hidden="true"></i></a>
+              <ul class="dropdown">
+                <li><a class="invite_f" href="javascript:;" onclick="test1('modal'); test('invite_f_container');">친구 초대하기</a></li><br>
+
+
+                <li><a class="share_travel"href="javascript:;"  onclick="test1('modal'); test('share_wrap');">여행기 공유하기</a></li><br>
+                <li><a class="delete_travel" href="javascript:;" onclick="test1('modal'); test('delete_wrap');">여행기 삭제하기</a></li><br>
+                <li><a class="lock_travel" href="javascript:;" onclick="test1('lock')">나만 보기</a></li><br>
+              </ul>
+              </nav>
+        </div>
+        </div>
+        <div class="card_bottom">
+          <img src="../upload/{{path}}" style='border-radius:100%'></img>
+          <span>{{alias}}</span>
+            <div class="mypage_list_heart">
+          <i class="fa fa-heart-o" aria-hidden="true"></i>
+          <span class="heart_num">3</span>
+        </div>
+        </div>
+              </div>
+            </div>
+            </li>
+{{/each}}
+		       </script>
+
 
 
 
@@ -230,28 +274,7 @@ body, table, div, p, textarea {font-family:'Nanum Gothic';}
             </li>
 
 
-
-    <li class="travel_item">
-      <div class="img_card">
-        <a href="#">
-          <img class="list_img" src="./Turkey.jpg"></img>
-        </a>
-      </div>
-      <div class="card_desc">
-<div class="card_title">
-  <div class="list_title"><a href="#">첫번째 여행기</a></div>
-  <i class="fa fa-align-justify" aria-hidden="true"></i>
-</div>
-<div class="card_bottom">
-  <img src="./usercircle.png"></img>
-  <span>swanpurple</span>
-    <div class="mypage_list_heart">
-  <i class="fa fa-heart-o" aria-hidden="true"></i>
-  <span class="heart_num">3</span>
-</div>
-</div>
-      </div>
-    </li>
+ 
 </ul>
   </div>
 
@@ -390,22 +413,19 @@ function test(idMyDiv) {
 </script>
 
 <script id="user-info-template" type="text/x-handlebars-template">
-  {{#info}} 
   <span class="user_name">{{alias}}</span> 
-  <a href="#" class="fa fa-cog fa-2x" id="mysetting" data-no="{{no}}"></a>
-
-  {{/info}} 
+  <a href="#" class="fa fa-cog fa-2x" id="mysetting"></a>
 </script>
 <script src="./node_modules/jquery/dist/jquery.min.js"></script>
 <script src="./node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="./mypage.js"></script>
+<script src="./mypage.js" charset="utf-8"></script>
 
 <script>
 "use strict"
 
-$('#fileupload').fileupload({
-    url: '../profile/upload2.json',        // 서버에 요청할 URL
-    dataType: 'json', /* "서버가 보낸 데이터가 JSON 문자열이다. 자바스크립트 객체로 바꿔라." 라는 의미*/
+/* $('#fileupload').fileupload({
+    url: '../member/upload2.json',        // 서버에 요청할 URL
+    dataType: 'json', /* "서버가 보낸 데이터가 JSON 문자열이다. 자바스크립트 객체로 바꿔라." 라는 의미
     done: function (e, data) { // 서버에서 응답이 오면 호출된다. 각 파일 별로 호출된다.
       console.log('done()...');
       console.log(data.result);
@@ -416,7 +436,7 @@ $('#fileupload').fileupload({
     }
 });
 
-$.getJSON('../profile/detail.json',{'no':no},function(result){w
+$.getJSON('../member/detail.json',{'no':no},function(result){w
 	  let str = result.data.memberPhoto;
 	  var path = window.location.pathname;
 	  console.log(path)
@@ -424,7 +444,7 @@ $.getJSON('../profile/detail.json',{'no':no},function(result){w
 	  $('.card_bottom').css({
 	      'background': 'url("/upload/' + str +'")'
 	  })
-	})
+	}) */
 
 </script>
 </body>

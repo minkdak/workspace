@@ -1,5 +1,7 @@
 package travelstudio.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,46 @@ public class DetailServiceImpl implements DetailService {
  
   
  
- public void sadd(Detail detail) throws Exception {
-   detailDao.insert(detail);
+  public List<Detail> list() throws Exception {
+    return detailDao.selectList();
+  }
+  
+ 
+ public void add(Detail detail) throws Exception {
+   /*detailDao.insert(detail);*/
+   detailDao.insert_map(detail);
    
  }
+ 
+
+@Override
+public void insertDetailByEmail(Detail detail) {
+  detailDao.insertDetailByEmail(detail);
+}
+@Override
+public void sadd(Detail detail) throws Exception {
+  detailDao.insert(detail);
+  
+}
+
+
+@Override
+public void deleteEmail(String writer) {
+  detailDao.deleteEmail(writer);
+  
+}
+
+
+@Override
+public void insertDetailContent(Detail detail) {
+  detailDao.insertDetailContent(detail);
+}
+
+
+@Override
+public List<Detail> selectedOneDetail(String postno) {
+  return detailDao.selectedOneDetail(postno);
+}
 //  
 //  public Teacher get(int no) throws Exception {
 //    return teacherDao.selectOne(no);

@@ -1,0 +1,61 @@
+    var appendNumber = 4;
+    var prependNumber = 1;
+    var swiper = new Swiper('.swiper-container', {
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        slidesPerView: 5,
+        centeredSlides: false,
+/*        paginationClickable: true,*/
+        spaceBetween: 10
+    });
+
+
+
+//var tbody = $('.box_slide_main');
+
+$.getJSON('../post/list.json', function(result) {
+
+   console.log(result.data.list);
+       var template = Handlebars.compile($('#content-template').html())
+       var generatedHTML = template(result.data) // 템플릿 함수에 데이터를 넣고 HTML을 생성한다.
+//       tbody.text('') // tbody의 기존 tr 태그들을 지우고
+//       tbody.append(generatedHTML) // 새 tr 태그들로 설정한다.
+       swiper.appendSlide(generatedHTML)
+  }) // getJSON()ile(title)
+  
+  
+/*  var mainbox = $('.owl-carousel');
+
+$.getJSON('../member/info.json', function(result) {
+	
+   console.log(result.data.info);
+       var template2 = Handlebars.compile($('#content-template-2').html())
+       var generatedHTML2 = template2(result.data) // 템플릿 함수에 데이터를 넣고 HTML을 생성한다.
+//       tbody.text('') // tbody의 기존 tr 태그들을 지우고
+       mainbox.append(generatedHTML2) // 새 tr 태그들로 설정한다.
+       
+       
+ 
+  })*/ // getJSON()ile(title)
+  
+//  //Initialize Plugin
+//$(".owl-carousel").owlCarousel()
+//
+////get carousel instance data and store it in variable owl
+//var owl = $(".owl-carousel").data('owlCarousel');
+//
+////Manipulation methods.
+//owl.addItem(htmlString [,targetPosition])
+//owl.removeItem(targetPosition)
+
+  
+  $.getJSON('../member/header.json',function(result){
+	let str = result.memberPhoto;
+	var path = window.location.pathname;
+	console.log(path)
+	console.log(str)
+	$('.user_photo_change').css({
+		  'background': 'url("/upload/' + str +'")' + 'center center no-repeat'
+		  
+	})
+}) 

@@ -6,13 +6,14 @@
 <mapper namespace="travelstudio.dao.DetailDao">
   
   <resultMap type="detail" id="detailMap">
-    <id column="picno" property="pictno"/>
+    <id column="picno" property="picno"/>
     <result column="postno" property="postno"/>
     <result column="cont" property="cont"/>
     <result column="date" property="date"/>
     <result column="lati" property="lati"/>
     <result column="longit" property="longit"/>
     <result column="writer" property="writer"/>
+    <result column="address" property="address"/>
   </resultMap> 
 
    <insert id="insert" parameterType="detail"> 
@@ -20,6 +21,15 @@
     values(#{picno},#{writer})
   </insert>
   
+  <insert id="insert_map" parameterType="detail"> 
+    insert into detail(lati, longit, address)
+    values(#{lati},#{longit}, #{address})
+  </insert>
+  
+   <select id="selectList" resultMap="detailMap" parameterType="map">
+    select lati, longit, postno from detail where postno = 1;
+    
+  </select> 
   
   
   <!-- 

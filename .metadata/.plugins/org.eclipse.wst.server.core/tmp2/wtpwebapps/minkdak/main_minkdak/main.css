@@ -22,6 +22,10 @@ time, tr, tt, u, ul, var, video {
   font-size: 100%;
   vertical-align: baseline;
 }
+
+
+
+}
 a {
   color: inherit;
 }
@@ -45,6 +49,8 @@ a:-webkit-any-link {
   font-family: 'Ropa Sans', sans-serif;
   margin-bottom: 20px;
   vertical-align: center;
+  
+
 }
 
 .help_btn {
@@ -103,8 +109,8 @@ display: inline-block;
 
 }
 #slide_icon{
-	margin-left:345px;
-	float:none;
+   margin-left:345px;
+   float:none;
 }
 /*슬라이드 바 취소 버튼 끝  */
 
@@ -364,6 +370,41 @@ i{
 }
 
 /* 여행기 슬라이드 블럭*/
+
+/* 스와이퍼 캐러셀*/
+.carousel {
+  background: #FAFAFA;
+  width: 170;
+}
+
+.carousel-cell {
+  width: 170px;
+  height: 200px;
+  margin-right: 5px;
+  background: #8C8;
+  border-radius: 5px;
+  counter-increment: carousel-cell;
+}
+
+/* cell number */
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(carousel-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+.item a {
+	color:inherit;
+}
+.item a:link {
+  border: none;
+  outline: 0;
+  
+}
+
+/* 스와이퍼 캐러셀 끝*/
 .slide_wrap {
   width: 1024px;
   height: 414px;
@@ -465,7 +506,7 @@ font-family: "Noto Sans KR"
 }
 
 .slide_wrap .box_slide_main .item .tag {
-  width: 75%;
+  width: 100%;
   height: 34px;
   min-height: 34px;
   overflow: hidden;
@@ -475,7 +516,10 @@ font-family: "Noto Sans KR"
   color: #8b8b8b;
   margin-bottom: 18px;
   line-height: 1.3;
+	
 }
+
+
 
 .box_slide_main .bottom_msg {
   width: 249px;
@@ -499,6 +543,18 @@ margin-bottom: 2px;
 }
 
 /*여행 작가 라인*/
+
+.swiper-wrapper {
+	padding: 20px;
+}
+
+.swiper-button-next {
+	background-image: url('./right-arrow.png')
+}
+
+.swiper-button-prev {
+	background-image: url('./img/left-arrow.png')
+}
 .travel_writer {
   position: relative;
   width: 1024px;
@@ -506,6 +562,7 @@ margin-bottom: 2px;
   padding: 30px auto 0;
   margin-bottom: 30px;
   background-color: #f2f9fb;
+  
 }
 
 .travel_writer .travel_writer_titl {
@@ -516,6 +573,14 @@ margin-bottom: 2px;
   margin: 20px auto 20px;
   /*margin-top: 20px;*/
   text-align: center;
+}
+
+.background_left {
+ background: 'url(./img/travelplane.png)' center center no-repeat;
+ position: relative;
+ float: left;
+ width: 292.5px;
+ height: 100%;
 }
 
 .travel_writer .travel_writer_titl .pc_text {
@@ -550,18 +615,14 @@ margin-bottom: 2px;
   /*padding-bottom: 20px;*/
 
 }
-
-.owl-stage-outer {
-  display: inline-block;
-  width: 800px;
-  margin-left: 100px;
-}
-
 .travel_writer_slide .travel_writer_photozone {
-  width: 160px;
+	position: relative;
+  width: 130px;
   height: 130px;
-  /*border: 1px solid blue;*/
-  margin-bottom: 10px;
+  background: url('./img/user_default.png') center center no-repeat;
+  border-radius: 100%;
+  margin: 0 auto 10px;
+  text-align: center;
 }
 
 .travel_writer_slide .travel_writer_photozone img {
@@ -569,6 +630,7 @@ margin-bottom: 2px;
   height: 130px;
   border-radius: 100%;
   margin: 0px auto;
+  background: url('./img/user_default.png') center center no-repeat;
 }
 
 .travel_writer_slide .travel_writer_id {
@@ -576,12 +638,18 @@ margin-bottom: 2px;
   /*z-index: 999;*/
   width: 160px;
   text-align: center;
-  margin: 0 0 10px 0;
-  font-size: 15px;
+  margin: 0 auto 10px;
+  font-size: 110%;
+  font-weight: 600;
 }
 
 .travel_writer_slide .travel_writer_intro {
   margin: 10px 0;
+  text-align: center;
+  overflow: hidden;
+  color: black;
+  font-size: 110%;
+  opacity: 0.7;
 }
 
 .travel_writer_slide .travel_writer_flag {
@@ -595,3 +663,12 @@ margin-bottom: 2px;
   height: 30px;
   border-radius: 100%;
 }
+
+.item{
+	float: left;
+	position: inline-block;
+}
+
+
+
+

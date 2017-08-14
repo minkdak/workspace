@@ -35,7 +35,7 @@
           요청 데이터를 처리하지 못한다!  -->
   <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-    <property name="maxUploadSize" value="10000000"/>
+    <property name="maxUploadSize" value="100000000"/>
   </bean>  
 </beans>
 
