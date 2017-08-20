@@ -365,6 +365,8 @@ $('#fileAllUpload').fileupload({
 //			$('#p_save_btn').click(function() {
 			plus(data);
 			var countPhoto = aaa;
+			console.log("photo길이 =======>")
+			console.log(photo.length)
 			for(var i = 0; i < photo.length; i++){
 			adddiv()
 			var textParent= $("#text_parent_"+countPhoto+"")
@@ -631,7 +633,7 @@ function plus(dataa){
 			return k==sortNo.indexOf(itm);
 		})
 	}
-	console.log(classify)
+//	console.log(classify)
 	//사진 sortNo 중복값 제거하고 배열에 담기 끝
 	var photoData = []
 	var countaa=0
@@ -645,7 +647,7 @@ function plus(dataa){
 		}
 		photo[sortno].push(dataa.result[i].path)
 		
-		for(var l = 0; l < classify.length; l++){
+//		for(var l = 0; l < classify.length; l++){
      		//if (dataa.result[i].sortno == classify[l]) {
 //			    for(var l = 0; sortno == i ; l++){
 //					photoData[l] = new Array();
@@ -659,13 +661,14 @@ function plus(dataa){
 //			photoData[l].push(dataa._response.result[i])
      		//}
 
-	    }
+//	    }
 	
 //		for(i = 0; i< dataa.result.length; i++) {
 //			console.log(dataa.result[i].path)
 //			photo[i][i] = ".."+dataa.result[i].path;
 //		}
 	}
+	console.log("함수안에서 photo 출력=====>")
 	console.log(photo)
 	return photo
 

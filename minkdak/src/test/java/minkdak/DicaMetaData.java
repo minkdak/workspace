@@ -16,7 +16,7 @@ import com.drew.metadata.exif.GpsDirectory;
 public class DicaMetaData {
  public static void main(String [] args) throws ImageProcessingException, IOException{
   
- File file = new File("C:\\Users\\bitcamp\\DeskTop\\333.jpg");
+ File file = new File("C:\\Users\\bitcamp\\Downloads\\20170816_205459.jpg");
 // file.createNewFile();
 // FileOutputStream fos = new FileOutputStream(file);
 // fos.close();

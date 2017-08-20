@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.net.URLDecoder"/>
 <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 <fullyQualifiedTypeName name="bitcamp.java93.dao.MemberDao"/>
 <fullyQualifiedTypeName name="com.mysql.jdbc.Statement"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
 <fullyQualifiedTypeName name="com.drew.imaging.jpeg.JpegMetadataReader"/>
+<fullyQualifiedTypeName name="travelstudio.control.json.FileControl.SortAscendingObj"/>
 </qualifiedTypeNameHistroy>
