@@ -14,13 +14,24 @@ import travelstudio.service.PostService;
 public class PostServiceImpl implements PostService {
   @Autowired PostDao postDao;
   
- 
+  public List<Post> selectOneUserPost(int number) throws Exception{
+    return postDao.selectOneUserPost(number);
+  }
+   
   
   public List<Post> list() throws Exception {
     
     return postDao.selectList();
   }
   
+  public List<Post> search(String keyword) throws Exception {
+    return postDao.search(keyword);
+  }
+  
+  @Override
+  public List<Post> info1(String number) throws Exception {
+    return postDao.info1(number);
+  }
   
  public List<Post> getWriteCount(Post post) throws Exception {
     
@@ -29,6 +40,17 @@ public class PostServiceImpl implements PostService {
  
  public void add(Post post) throws Exception {
    postDao.insert(post);
+   
+ }
+ 
+ public Post selectOne(String postno) throws Exception {
+   
+   return postDao.selectOne(postno);
+ }
+ 
+ @Override
+ public void like(Post post) throws Exception {
+   postDao.updateLike(post);
    
  }
 //  

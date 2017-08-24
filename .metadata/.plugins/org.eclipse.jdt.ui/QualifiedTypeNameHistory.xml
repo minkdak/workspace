@@ -18,7 +18,6 @@
 <fullyQualifiedTypeName name="step26.Test09.My"/>
 <fullyQualifiedTypeName name="org.springframework.context.support.ClassPathXmlApplicationContext"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="org.omg.Messaging.SyncScopeHelper"/>
 <fullyQualifiedTypeName name="java.beans.PropertyEditor"/>
@@ -53,11 +52,12 @@
 <fullyQualifiedTypeName name="java.util.logging.Logger"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="com.drew.metadata.exif.GpsDirectory"/>
 <fullyQualifiedTypeName name="com.drew.imaging.ImageMetadataReader"/>
 <fullyQualifiedTypeName name="com.drew.metadata.Tag"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
 <fullyQualifiedTypeName name="com.drew.imaging.jpeg.JpegMetadataReader"/>
 <fullyQualifiedTypeName name="travelstudio.control.json.FileControl.SortAscendingObj"/>
+<fullyQualifiedTypeName name="com.drew.metadata.exif.GpsDirectory"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

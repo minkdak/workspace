@@ -8,6 +8,7 @@
   <resultMap type="detail" id="detailMap">
     <id column="picno" property="picno"/>
     <result column="postno" property="postno"/>
+    <result column="srtno" property="srtno"/>
     <result column="cont" property="cont"/>
     <result column="date" property="date"/>
     <result column="lati" property="lati"/>
@@ -17,13 +18,13 @@
   </resultMap> 
 
    <insert id="insert" parameterType="detail"> 
-    insert into detail(picno, writer)
-    values(#{picno},#{writer})
+    insert into detail(picno, writer,srtno)
+    values(#{picno},#{writer},#{srtno})
   </insert>
   
    <insert id="insert_map" parameterType="detail"> 
-    insert into detail(lati, longit, writer)
-    values(#{lati},#{longit}, #{writer})
+    insert into detail(lati, longit, writer, srtno)
+    values(#{lati},#{longit}, #{writer}, #{srtno})
   </insert>
   
    <select id="selectList" resultMap="detailMap" parameterType="map">
@@ -41,13 +42,24 @@
   </update>
   
    <insert id="insertDetailContent" parameterType="detail"> 
-    insert into detail(cont, postno)
-    values(#{cont},#{postno})
+    insert into detail(cont, postno, srtno)
+    values(#{cont},#{postno}, #{srtno})
   </insert>
   
   <select id="selectedOneDetail" resultMap="detailMap" parameterType="String">
-  select * from detail where postno=#{postno}
+  select * from detail where postno=#{postno} order by srtno asc
   </select>
+  
+ <select id="selectAddress" resultMap="detailMap" parameterType="Integer">
+    select d.address
+    from post p inner join detail d on p.postno=d.postno
+    where mno=#{mno}
+  </select> 
+  
+   <insert id="addAllphoto" parameterType="detail"> 
+    insert into detail(picno, writer, srtno)
+    values(#{picno},#{writer},#{srtno})
+  </insert>
   
 
 

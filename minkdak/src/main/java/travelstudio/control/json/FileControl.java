@@ -96,17 +96,17 @@ public class FileControl {
       File file = new File(ctx.getRealPath("/upload/" + newFilename));
       files[i].transferTo(file);
       
-      File thumbnail = new File(ctx.getRealPath("/upload/" + newFilename + "_200"));
-      Thumbnails.of(file).size(200, 200).outputFormat("png").toFile(thumbnail);
+/*      File thumbnail = new File(ctx.getRealPath("/upload/" + newFilename + "_200"));
+      Thumbnails.of(file).size(200, 200).outputFormat("png").toFile(thumbnail);*/
       
-      thumbnail = new File(ctx.getRealPath("/upload/" + newFilename + "_300"));
+      File thumbnail = new File(ctx.getRealPath("/upload/" + newFilename + "_300"));
       Thumbnails.of(file).size(300, 300).outputFormat("png").toFile(thumbnail);
       
-      thumbnail = new File(ctx.getRealPath("/upload/" + newFilename + "_400"));
-      Thumbnails.of(file).size(400, 400).outputFormat("png").toFile(thumbnail);
+      /*thumbnail = new File(ctx.getRealPath("/upload/" + newFilename + "_400"));
+      Thumbnails.of(file).size(400, 400).outputFormat("png").toFile(thumbnail);*/
       
-      thumbnail = new File(ctx.getRealPath("/upload/" + newFilename + "_500"));
-      Thumbnails.of(file).size(500, 500).outputFormat("png").toFile(thumbnail);
+/*      thumbnail = new File(ctx.getRealPath("/upload/" + newFilename + "_500"));
+      Thumbnails.of(file).size(500, 500).outputFormat("png").toFile(thumbnail);*/
       
       thumbnail = new File(ctx.getRealPath("/upload/" + newFilename + "_600"));
       Thumbnails.of(file).size(600, 600).outputFormat("png").toFile(thumbnail);

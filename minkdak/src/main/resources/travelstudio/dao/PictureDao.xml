@@ -20,6 +20,12 @@
     from post
   </sql> 
    -->
+  <insert id="insert2" parameterType="String" 
+          useGeneratedKeys="true" keyColumn="picno">
+    insert into pic(path)
+    values(#{filename})
+  </insert>
+  
   <insert id="insert" parameterType="picture" 
           useGeneratedKeys="true" keyColumn="picno">
     insert into pic(path, lati, longit, time, sno)
@@ -30,6 +36,29 @@
   	select picno from pic where path=#{path}
   </select>
   
+    <delete id="delete" parameterType="int">
+    delete de, pi from detail as de LEFT JOIN pic as pi
+    on de.picno = pi.picno
+    where pi.picno=#{picno}
+  </delete>
+  
+  <!--   <delete id="delete" parameterType="String">
+    delete from pic
+    where path=#{path}
+  </delete> -->
+  
+  <select id="selectByPost" resultMap="pictureMap" parameterType="String">
+    select * from pic where picno=#{pictureno}
+  </select>
+
+  
+    <select id="searchthispicture" resultMap="pictureMap" parameterType="String">
+    select * from pic where path=#{path}
+  </select>
+  
+  <select id="searchPicNo" resultMap="pictureMap" parameterType="String">
+    select picno from pic where path=#{path}
+  </select>
 <!--   <select id="selectPicture" resultMap="pictureMap" parameterType="String">
     select picno from pic where path=#{path}
   </select> -->

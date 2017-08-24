@@ -16,6 +16,9 @@
 
 }
 
+.day1{
+  width:1150px;
+}
 .help_btn {
 
   background-color: black;
@@ -126,7 +129,9 @@ a:link {
   color: #767676;
   margin: 10px auto;
 }
-
+/* div{
+  border:1px solid ;
+} */
 .edit_settings li {
   /*display: inline-block;*/
   color: #4265EE;
@@ -135,7 +140,13 @@ a:link {
   margin: 10px 0 0 10px;
   vertical-align: center
 }
-
+ .text_parent{
+  
+  width:900px;
+  min-height:150px;
+/*  border:1px solid black; */
+  display:inline-block;
+}
 
 /*.edit_group, .edit_settings img {
   display: inline-block;
@@ -155,10 +166,7 @@ a:link {
   height: 685px;
   overflow: auto;
 }
-#text_parent {
-/*   border: solid 1px red; */
 
-}
 div[class*=table_files] {
   width: 1119px;
   height: 179px;
@@ -435,6 +443,7 @@ a:-webkit-any-link {
   vertical-align: top;
   margin-right: 15px;
   height: 125px;
+  
 }
 
 .write_day>div {
@@ -465,7 +474,7 @@ a:-webkit-any-link {
 .day_list {
   margin-top: 20px;
   margin-bottom: 40px;
-  height: 125px;
+  height: auto;
   display: inline-block;
 }
 
@@ -500,6 +509,7 @@ a:-webkit-any-link {
   margin-left: 10px;
 }
 
+
 #map_container {
   display: none;
   position: absolute;
@@ -507,9 +517,12 @@ a:-webkit-any-link {
   background-color: white;
   border: solid 1px gray;
   border-radius: 1%;
-  height: 600px;
-  width: 800px;
+  height: 650px;
+  width: 850px;
+  margin-left: 215px;;
+ 
 }
+
 
 #map_container>h3 {
   text-align: center;
@@ -541,6 +554,7 @@ a:-webkit-any-link {
 
 .day1 {
   margin-top: 30px;
+  height:auto;
 }
 
 div[id*='testdiv']>a>img {
@@ -669,15 +683,13 @@ button[id*='day_btn'] {
 }
 
 
-/*search 끝*/
-
-#cancel-login, #login-summit {
+#cancel-login, #login-summit, #saveMap-summit {
   border: 2px solid #6a7991;
-  width: 200px;
-  height: 40px;
+  width: 150px;
+  height: 45px;
   border-radius: 25px;
   font-size: 17px;
-  margin-bottom: 15px;
+ 
 }
 
 #cancel-login {
@@ -688,11 +700,113 @@ button[id*='day_btn'] {
 }
 
 .buttons {
-  margin-left: 210px;
-  margin-top: 30px;
+  margin-left: 250px;
+  margin-top: 15px;
+}
+
+#login-summit, #saveMap-summit{
+  background-color: white;
+  color: #6a7991;
+  font-weight: bold;
 }
 
 
+
+/***** Google maps CSS *****/
+#map {
+  height: 400px;
+  width: 500px;
+  margin-left:20px;
+  display: inline-block;
+}
+
+.controls {
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  
+}
+
+
+
+#mapPlusSearchbox{
+  width: 800px;
+  height: 410px;
+  margin-left: 30px;
+  
+  
+}
+#pac-input {
+  background-color: white;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 230px;
+  height: 40px;
+  float: left;
+  display: inline-block;
+  border: 1px solid #e5e5e5;
+  border-right-color: white;
+  border-radius: 4px 0 0 4px;
+
+}
+
+#cleanSearchBox{
+  background-color: white;
+  display: inline-block;
+  float:left;
+  height: 40px;
+  width: 30px;
+  font-weight: bold;
+  border: 1px solid #e5e5e5;
+  border-left-color: white;
+  border-radius: 0 4px 4px 0;
+ 
+
+  
+}
+
+
+ #pac-input:focus {
+  border-color: #4d90fe;
+} 
+ 
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.pac-container {
+  background-color: #FFF;
+  z-index: 20;
+  position: fixed;
+  display: inline-block;
+  float: left;
+}
+
+.modal {
+  z-index: 20;
+}
+
+.modal-backdrop {
+  z-index: 10;
+}
 
 /* 콜라쥬 */
 
@@ -701,6 +815,8 @@ button[id*='day_btn'] {
         width:824px;
         height:412px;
         background-color: white;
+        position: relative;
+        
       }
 
         .two_photo_col {
@@ -722,16 +838,17 @@ button[id*='day_btn'] {
         width:824px;
         height:549px;
         background-color: white;
+        position: relative;
       }
 
-      #collage3-1-big {
+      .collage3-big {
         width: 534px;
         height: 534px;
         overflow: hidden;
         display: inline-block;
       }
 
-      #collage3-1-big img{
+      .collage3-big img{
         margin: 15px 0 0 15px;
         max-height: 534px;
       }
@@ -759,6 +876,7 @@ button[id*='day_btn'] {
         width:824px;
         height:824px;
         background-color: gray;
+        position: relative;
       }
 
       .four_photo_collage{
@@ -781,6 +899,7 @@ button[id*='day_btn'] {
         background-color: #ffffff;
         /* position: absolute; */
         /* padding-left:- 5px; */
+        position: relative;
       }
 
       .top_three_collage{
@@ -814,16 +933,17 @@ button[id*='day_btn'] {
         width:824px;
         height:824px;
         background-color: gray;
+        position: relative;
       }
 
-      #collage6-1-big{
+      .collage6-big{
         width: 534px;
         height: 534px;
         overflow: hidden;
         display: inline-block;
       }
 
-      #collage6-1-big img{
+      .collage6-big img{
         margin: 15px 0 0 15px;
         max-height: 534px;
       }
@@ -864,7 +984,8 @@ button[id*='day_btn'] {
            .whole_collage7{
         width:824px;
         height:824px;
-        background-color: gray;
+        background-color: #fff;
+        position: relative;
       }
 
       .four_of_seven{
@@ -882,7 +1003,7 @@ button[id*='day_btn'] {
       }
 
       .bottom_three_of_seven img{
-        margin: 15px 0 0 15px;
+        margin: 15px 0 0 0px;
         max-height: 397px;
       }
 
@@ -894,7 +1015,7 @@ button[id*='day_btn'] {
       }
 
       .right_four_of_seven img{
-        margin: 15px 0 0 15px;
+        margin: 15px 0 0 0px;
         max-height: 192px;
       }
   /* 콜라쥬 7개 끝 */
@@ -904,17 +1025,18 @@ button[id*='day_btn'] {
         .whole_collage8{
         width:824px;
         height:687px;
-        background-color: gray;
+        background-color: #fff;
+        position: relative;
       }
 
-      #collage8-1-big{
+      .collage8-1{
         width: 397px;
         height: 397px;
         overflow: hidden;
         display: inline-block;
       }
 
-      #collage8-1-big img{
+      .collage8-1 img{
         margin: 15px 0 0 15px;
         max-height: 397px;
       }
@@ -956,17 +1078,18 @@ button[id*='day_btn'] {
         .whole_collage9{
         width:824px;
         height:618px;
-        background-color: gray;
+        background-color: #fff;
+        position: relative;
       }
 
-      #collage9-1-big{
+      .one_of_nine{
         width: 397px;
         height: 397px;
         overflow: hidden;
         display: inline-block;
       }
 
-      #collage9-1-big img{
+      .one_of_nine img{
         margin: 15px 0 0 15px;
         max-height: 397px;
       }
@@ -1002,3 +1125,156 @@ button[id*='day_btn'] {
       }
   
   /* 콜라쥬 9개 끝 */
+  .gpsInfo {
+    font-size: 120%;
+    position: absolute;
+  }
+  
+  
+  /*콜라쥬 클릭시*/
+    ol, ul{
+        list-style: none;
+        vertical-align: baseline;
+        text-align: center;
+        height: 100%;
+        box-sizing: border-box;
+        font-weight: 400;
+        display: block;
+      }
+
+      .control_box {
+        width: 100%;
+        /*border: 1px solid black;*/
+        background-color: black;
+        opacity: 0.8;
+        position: absolute;
+        /* float:left; */
+        top: 0;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+        text-align: center;
+        display: block;
+        height: 100%;
+        display:none;
+      }
+
+      .control_box li {
+        /* vertical-align: middle;
+        text-align: center;
+        display: inline-block; */
+        /*margin-left: 50%;
+        margin-top: 50%;*/
+        /*margin-right: auto;*/
+        /*position: absolute;*/
+        /* margin: 27% auto 0  ; */
+        /* margin:0; */
+        /*top: 50%;*/
+        /*left: 50%;*/
+        /*transform: translate(-50%, -50%);*/
+        /*padding: 5px;*/
+        /* float: left;
+        padding: 2px 5px;
+        border: 1px solid black; */
+        /* margin: 0; */
+        /* display: inline; */
+        float: left;
+        position: relative;
+        left: 50%;
+        
+        top: 35%;
+        
+      }
+      .control_box ul {
+        /* display: inline-block;
+        text-align: center; */
+/*         height: 100%;
+        width: 100%; */
+        /* vertical-align: middle;
+        line-height: 1; */
+        /*top: 50%;*/
+        /*left: 50%;*/
+        /*transform: translate(-50%, -50%);*/
+    /*     margin: 0;
+        padding: 0;
+        zoom:1;
+        *display: inline; */
+      
+        float: right;
+        position: relative;
+        left: -50%;
+      }
+      button {
+          margin: 0;
+          padding: 0;
+          cursor: pointer;
+          text-align: center;
+          text-rendering: auto;
+          color: initial;
+          letter-spacing: normal;
+          word-spacing: normal;
+          text-transform: none;
+          text-indent: 0px;
+          text-shadow: none;
+          outline: 0;
+          border: 0;
+          
+          
+      }
+
+
+    .btn_add {
+    display: inline-block;
+    background: url('./add-picture.png') 50% no-repeat;
+    width: 128px;
+    background-size: 33px 35px;
+    vertical-align: middle;
+    /* padding-top: 10%; */
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    height: 80px;
+    padding-top: 50%;
+    }
+
+    .btn_del {
+    display: inline-block;
+    background: url(./trash.png) 50% no-repeat;
+    width: 128px;
+    background-size: 33px 35px;
+    vertical-align: middle;
+    padding-top: 10%;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    height: 80px;
+    padding-top: 50%;
+    }
+
+    .btn_edit {
+    display: inline-block;
+    background: url('./edit-picture.png') 50% no-repeat;
+    width: 128px;
+    background-size: 33px 35px;
+    vertical-align: middle;
+    padding-top: 10%;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    height: 80px;
+    padding-top: 50%;
+    }
+
+    .btn_caption {
+    display: inline-block;
+    background: url('./speech-bubble.png') 50% no-repeat;
+    width: 128px;
+    background-size: 33px 35px;
+    vertical-align: middle;
+    padding-top: 10%;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    height: 80px;
+    padding-top: 50%;
+    }

@@ -13,7 +13,16 @@ public interface PictureDao {
 //  Member selectOne(int no);
   Member selectOneByEmailPassword(Map<String,Object> valueMap);
 int insert(Picture picture);
+int insert2(String filename);
+int insert1(Picture picture);
+int insertAllPhoto(Picture picture);
 List<Picture> selectPicNo(String path);
+Picture selectByPost(String pictureno);
+Picture searchthispicture(String path);
+Picture searchPicNo(String path);
+
+//int delete(String filename);
+int delete(int deletepno);
 //  int update(Member member);
 //  int delete(int no) throws Exception;
 }

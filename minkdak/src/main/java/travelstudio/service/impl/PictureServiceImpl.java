@@ -13,28 +13,57 @@ import travelstudio.service.PictureService;
 public class PictureServiceImpl implements PictureService {
   @Autowired PictureDao pictureDao;
   
+public void add(String filename) throws Exception {
+  pictureDao.insert2(filename);
   
+}  
  
-//  
-//  public List<Post> list() throws Exception {
-//    
-//    return postDao.selectList();
-//  }
-//  
-//  
-// public List<Post> getWriteCount(Post post) throws Exception {
-//    
-//    return postDao.getWriteCount(post);
-//  }
-// 
+public void add1(Picture picture) throws Exception {
+  pictureDao.insert1(picture);
+  
+}
+
+public void addAllPicture(Picture picture) throws Exception {
+  pictureDao.insertAllPhoto(picture);
+  
+}
+
  public void add(Picture picture) throws Exception {
    pictureDao.insert(picture);
    
  }
+ 
  public List<Picture> selectPicNo(String path){
    return pictureDao.selectPicNo(path);
    
  };
+ @Override
+ public Picture selectByPost(String pictureno) {
+     return pictureDao.selectByPost(pictureno);
+     
+ };
+
+ public Picture searchthispicture(String path) {
+   return pictureDao.searchthispicture(path);
+   
+ };
+ public Picture searchPicNo(String path) {
+   System.out.printf("나오냐====>");
+   System.out.println(path);
+   return pictureDao.searchPicNo(path);
+ };
+ 
+ public void delete(int deletepno) {
+   System.out.println("임플에서 path 출력");
+   System.out.println(deletepno);
+   pictureDao.delete(deletepno);
+ }
+ 
+//public void delete(String path) {
+//  System.out.println("임플에서 path 출력");
+//  System.out.println(path);
+//  pictureDao.delete(path);
+//}
 //  
 //  public Teacher get(int no) throws Exception {
 //    return teacherDao.selectOne(no);

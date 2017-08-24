@@ -38,6 +38,10 @@ public void sadd(Detail detail) throws Exception {
   
 }
 
+public void addMap(Detail detail) throws Exception {
+  /*detailDao.insert(detail);*/
+  detailDao.insert_map(detail);
+}
 
 @Override
 public void deleteEmail(String writer) {
@@ -56,6 +60,19 @@ public void insertDetailContent(Detail detail) {
 public List<Detail> selectedOneDetail(String postno) {
   return detailDao.selectedOneDetail(postno);
 }
+
+@Override
+public List<Detail> selectAddress(int mno) throws Exception {
+  return detailDao.selectAddress(mno);
+}
+
+
+@Override
+public void addAllphoto(Detail detail) {
+  detailDao.addAllphoto(detail);
+  
+}
+
 //  
 //  public Teacher get(int no) throws Exception {
 //    return teacherDao.selectOne(no);

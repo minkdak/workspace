@@ -17,15 +17,23 @@
     <result column="detail" property="detail"/>
     <result column="ispublic" property="ispublic"/>
         <result column="mno" property="no"/>
+        <result column="good" property="good"/>
   </resultMap> 
 
 
-    <select id="info1" resultMap="postMap" parameterType="String">
+  <select id="info1" resultMap="postMap" parameterType="String">
     select * from post natural join member where postno=#{number}
   </select>
     
+   <select id="search" resultMap="postMap" parameterType="String">
+    select * from post natural join member where title like concat('%',#{keyword},'%')
+  </select>
     
     
+  <select id="selectOneUserPost" resultMap="postMap" parameterType="int">
+    select * from post natural join member where mno=#{number} order by postno desc
+  </select>
+  
 <insert id="insert" parameterType="post" useGeneratedKeys="true" keyColumn="postno" >
     insert into post(postno, title, sdt, edt, cont, pdt, mno) 
     values(null, #{title}, #{sdt},#{edt},#{cont},'2017-07-07',#{no})
@@ -34,7 +42,10 @@
         SELECT LAST_INSERT_ID()
     </selectKey>
   </insert>
-
+  
+  <update id="updateLike" parameterType="post">
+    update post set good=#{good} where postno=#{postno}
+  </update>
   
   <select id="selectOne" resultMap="postMap" parameterType="String">
     select * 
@@ -49,6 +60,7 @@
     order by name asc 
     limit #{startIndex}, #{pageSize} -->
   </select>
+  
    <select id="selectList" resultMap="postMap" parameterType="map">
     select * from post natural join member order by postno desc
   </select> 

@@ -9,7 +9,7 @@
   <!-- <link rel="stylesheet" type="text/css" href="./main.css"> -->
   <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDEsgodbW4NrW5grQitDfklBBZhS9hicSY">
+  <!-- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDEsgodbW4NrW5grQitDfklBBZhS9hicSY"> -->
   
   </script>
 
@@ -25,6 +25,15 @@
     }
 
    
+   #delete_btn{
+   border: 1px solid gray;
+   width: 45px;
+   height: 25px;
+   background-color: white;
+   border-radius: 12.5px;
+   color: gray;
+   margin-left: 650px;
+   }
 
 
     a {
@@ -737,6 +746,7 @@ line-height: 35px;
 
     #author {
       width: 90px;
+      height: 90px;
     }
 
     .alias {
@@ -806,7 +816,7 @@ line-height: 35px;
       border: none;
       border-top: 1px solid #d6d7d8;
       height: 150px;
-      ;
+      
       padding-left: 20px;
       list-style: none;
       padding: 16px;
@@ -906,6 +916,7 @@ line-height: 35px;
       width: 698px;
       height: 108px;
       border-radius: 2px;
+      margin-top:30px;
     }
 
     #inner_command {
@@ -924,17 +935,7 @@ line-height: 35px;
     border: 1px solid white;
     }
     
-   
-/*
-   .other_article_of_author{
-     border:1px solid black;
-     max-height: 200px;
-     overflow: hidden;
-   }
-    #prev, #after{
-      display: inline-block;
-      width: 48%;
-    }*/
+    
   </style>
 
 
@@ -962,13 +963,14 @@ line-height: 35px;
     <input type="search" id="search_bar" placeholder="검색">
     <button id="search_icon" class="fa fa-search fa-2x" onclick="search()" aria-hidden="true"></button>
     <button type="button" id="start-my-journey">여행기 작성</button>
-  </div> -
+  </div> 
+  <br>
   
   
 <div id="blank-one" class="blank-one">
   <script id="content-template-3" type="text/x-handlebars-template">
 {{#selectedPost}}
-    <textarea>{{title}}</textarea>
+    <textarea disabled>{{title}}</textarea>
     <div class="bb">
 
       <a href="#" class="write_select_date_start">
@@ -987,7 +989,7 @@ line-height: 35px;
 
     <div class="faces">
       <div class="face">
-        <a href="#"><img src="../upload/{{path}}" ></a>
+        <a href="#"><img src="../mypage/upload/{{path}}" ></a>
       </div>
       <div class="face2">
         <a href="#"><img src="../upload/{{path}}" id="Emma"></a>
@@ -996,6 +998,7 @@ line-height: 35px;
 {{/selectedPost}}
   </script>
   </div>
+  
 
   <!--내용상자-->
   <div class="container_main">
@@ -1043,15 +1046,11 @@ line-height: 35px;
 </div>
  -->
   <div class="whole_collage1">
-<script id="content-template-6" type="text/x-handlebars-template">
-{{#each fileList}}
-  <div  id="one_whole_collage"><img id="img_4" src="../{{path}}"></div>
-</div>
-{{/each}}
-</script>
+
 
 <div id="text_box">
 	<script id="content-template-2" type="text/x-handlebars-template">
+
 {{#each list}}
 {{#if cont}}
 <div class="caption">{{cont}}</div>
@@ -1059,7 +1058,16 @@ line-height: 35px;
 <p>{{cont}}</p>
   </div>
 {{/if}}
+{{#if picno}}
+  <div  id="one_whole_collage"><img id="img_4" src="../{{picno}}_700.png"></div>
+</div>
+{{/if}}
+{{#if lati}}
+<div style='width:809px; height:380px; border:1px solid white; margin-bottom: 70px;' id="map{{srtno}}" data-lati={{lati}} data-longit={{longit}}"}></div>
+{{/if}}
+
 {{/each}}
+
 </script>
 </div>
 
@@ -1070,7 +1078,7 @@ line-height: 35px;
 </div>
 <br>
 
-<a id="list_heart" href="javascript:;"><i id="list_heart_1" class="fa fa-heart-o fa-3x" aria-hidden="true"></i></a>
+<a id="list_heart" href="javascript:;"><i id="list_heart_1" class="fa fa-heart-o fa-3x" aria-hidden="true"></i></a><span id="heart-count"></span>
 
 
 <!--글쓴이 프로필-->
@@ -1091,7 +1099,7 @@ line-height: 35px;
 
 </div>
 <div class="sub_box">
-<button type="button" id="subsc_btn">구독하기</button>
+
 </div>
 
 
@@ -1131,7 +1139,7 @@ line-height: 35px;
 					<div class="command_box">
 						<p id="inner_command">{{cont}}</p>
 					</div><span><a href="../mypage/report.html" id="singo">신고</a></span>
-          <button id="edit_btn">수정</button>
+          
           <button type="button" id="delete_btn">삭제</button>
 				</div>
 		</span>
@@ -1156,44 +1164,156 @@ line-height: 35px;
 <!--내용상자-->
 
 <!--구글지도-->
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvJO_nbwEqokghhsnj7oj_uQPgnjFoa84&libraries=places"></script>
 <script src="./node_modules/jquery/dist/jquery.min.js"></script>
 <script src="./node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="./inner_article.js"></script>
 
    <script>
-      function initialize()
-      {
-       var mapProp = {
-         center: new google.maps.LatLng(37.250943, 127.028344),
-         zoom:7,
-         zoomControl:true,
-         zoomControlOptions: {
-           style:google.maps.ZoomControlStyle.SMALL
-         },
-         mapTypeId: google.maps.MapTypeId.ROADMAP
-       };
-       var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
+   var mapname2;
+   function initMap(mapname) {
+	   console.log(mapname)
+	   mapname2=mapname
+       var map = new google.maps.Map(document.getElementById(mapname), {
+         zoom: 8,
+         center: {lat: parseFloat(document.getElementById(mapname).getAttribute('data-lati')), lng: parseFloat(document.getElementById(mapname).getAttribute('data-longit'))}
+       });
+       var geocoder = new google.maps.Geocoder;
+       var infowindow = new google.maps.InfoWindow;
 
+       geocodeLatLng(geocoder, map, infowindow);
+     }
 
+     function geocodeLatLng(geocoder, map, infowindow) {
+   	 
+       /* var input = document.getElementById('latlng').value; */
+       
+       /* var latlngStr = input.split(',', 2); */
+       var latlng = {lat: parseFloat(document.getElementById(mapname2).getAttribute('data-lati')), lng: parseFloat(document.getElementById(mapname2).getAttribute('data-longit'))};
+       geocoder.geocode({'location': latlng}, function(results, status) {
+         if (status === 'OK') {
+           if (results[1]) {
+             map.setZoom(14);
+             map.setCenter(results[0].geometry.location);
+             var marker = new google.maps.Marker({
+               position: latlng,
+               map: map
+             });
+             infowindow.setContent(results[1].formatted_address);
+             infowindow.open(map, marker);
+           } else {
+             window.alert('No results found');
+           }
+         } else {
+           window.alert('Geocoder failed due to: ' + status);
+         }
+       });
+     }
 
 
  <!-- 하트 -->
      $("#list_heart").on({
        'click':function(){
-
+if(loginmemberno==undefined){
+	alert("'좋아요'를 하려면 로그인이 필요합니다.")
+}else{
+    	   var number;
         //  class="fa fa-heart fa-2x"
         //  class="fa fa-heart-o fa-2x"
          var color = ($('#list_heart>i').attr('class') === 'fa fa-heart-o fa-3x')
                 ? 'fa fa-heart fa-3x'
                 : 'fa fa-heart-o fa-3x';
-
-
+        	 number = parseInt($('#heart-count').html())
+        	 console.log(number)
+     	if(color=='fa fa-heart fa-3x'){
+    		$("#heart-count").html(number+1)
+     	}else{
+     		$("#heart-count").html(number-1)
+     	}
     $('#list_heart_1').attr('class',color);
+    likeclick(color,number); 
         }
-     })
+     }})
+     
+function likeclick(color,number){
+    	 console.log(number)
+    	 $.post('/travelstudio/good/searchBymnopostno.json', {
+		'postno': no,
+		'mno': loginmemberno
+	}, function(result) {
+		console.log('1')
+		console.log(result)
+		if(result.status!='success'){
+			number+=1;
+			$.post('/travelstudio/good/add.json', {
+    			'postno':no,
+    			'mno':loginmemberno, //js의 댓글작성부분에서 memberinfo값 정의한다.
+    			'gcnt':1,
+    			'number':number
+    		}, function(result) {
+    			/* $('<span id="heart-count">').html(number).insertAfter($('list_heart_1')) */
+    			/* $('#heart-count').html(parseInt($('#heart-count').html())+1) */
+    		})
+		}else{
+			number-=1;
+			$.post('/travelstudio/good/delete.json', {
+    			'postno':no,
+    			'mno':loginmemberno, //js의 댓글작성부분에서 memberinfo값 정의한다.
+    			'number':number
+    		}, function(result) {
+    			/* $("#heart-count").remove();
+    			$('<span id="heart-count">').html(number).insertAfter($('list_heart_1')) */
+    			/* $('#heart-count').html(parseInt($('#heart-count').html())-1) */
+    		})
+		}
+		
+	}, 'json')
+     }
+    	 /* 구독하기 시작 */
+    	 $(document).on("click",'#subsc_btn',function(){  
+    	 if(loginmemberno==undefined){
+    			alert("'좋아요'를 하려면 로그인이 필요합니다.")
+    		}else{
+         console.log($(this).css('color')=='rgb(0, 0, 0)')
+         if($(this).css('color')=='rgb(0, 0, 0)'){
+           $(this).css({"border": "1px solid #2be5a4", "color": "#2be5a4"});
+           subClick('add')
+         }
+         else{
+           $(this).css({"border": "1px solid black", "color": "black"});
+           subClick('del')
+         }
+    		}
+       });
+     /* 구독하기 끝*/
 
+     function subClick(res){
+    	 console.log(res)
+    		  $.post('/travelstudio/follow/searchBymnomno2.json', {
+    				'mno': loginmemberno,
+    				'mno2': writeMemberno
+    			}, function(result) {
+    				console.log(result) //로그인 회원 번호와 작성자 회원 번호로 데이터값 조회 
+    				if(result.status!='success'){ //만약 해당하는 데이터가 없다면 add 시키고 
+    					$.post('/travelstudio/follow/add.json', {
+    		    			'mno':loginmemberno, //js의 댓글작성부분에서 memberinfo값 정의한다.
+    		    			'mno2':writeMemberno,
+    		    			'postno':no
+    		    		}, function(result) {
+    		    			
+    		    		})
+    				}else{ //로그인 회원 번호와 작성자 회원 번호로 데이터값 조회 했을때 있다면 delete 시킨다.
+    					
+    					$.post('/travelstudio/follow/delete.json', {
+    						'mno': loginmemberno,
+   	    				'mno2': writeMemberno
+    		    		}, function(result) {
+    		    			console.log
+    		    		})
+   	 			 } //else 끝
+    			})
+     }
 <!--header숨는거
         var prev = 0;
         var view = $(window);
@@ -1202,7 +1322,7 @@ line-height: 35px;
         view.on('scroll', function(){
         var scrollTop = view.scrollTop();
         mast.toggleClass('hidden', scrollTop > prev);
-        console.log(scrollTop);
+        
         prev = scrollTop;
         });
         -->
@@ -1216,19 +1336,9 @@ line-height: 35px;
           $("#singo").hide();
         });
 
-        $('#subsc_btn').click(function(){
-          console.log($(this).css('color')=='rgb(0, 0, 0)')
-          if($(this).css('color')=='rgb(0, 0, 0)'){
-            $(this).css({"border": "1px solid #2be5a4", "color": "#2be5a4"});
-          }
-          else{
-            $(this).css({"border": "1px solid black", "color": "black"});
-          }
-        });
+    
 
-        // $('#subsc_btn').click(function(){
-        //   $(this).css({"border": "1px solid #2be5a4", "color": "#2be5a4"});
-        // });
+      
 
 
 function slideCall() {
@@ -1255,34 +1365,7 @@ $(document).ready(slideCall)
 $(document).ready(slide_off)
 // (slideCall);
 
-$(document).ready(function(){
-  //자동회전과 꽉찬 1개의 슬라이드만 나오도록 설정
-  $(".owl-carousel").owlCarousel({
-    items:1,
-    loop:true,
-    autoplay:true,
-    autoplayTimeout:20,
-    autoplayHoverPause:true
-  });
-});
 
-$('.owl-carousel').owlCarousel({
-  loop:false,
-  margin:10,
-  nav:true,
-  autoWidth:true,
-  responsive:{
-    0:{
-      items:1
-    },
-    600:{
-      items:4
-    },
-    1000:{
-      items:5
-    }
-  }
-})
 
 
 

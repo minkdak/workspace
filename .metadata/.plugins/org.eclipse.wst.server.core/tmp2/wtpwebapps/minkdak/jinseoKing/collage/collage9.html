@@ -8,6 +8,8 @@
         width:824px;
         height:618px;
         background-color: gray;
+        position: relative;
+
       }
 
       #collage9-1-big{
@@ -51,13 +53,139 @@
         margin: 15px 0 0 15px;
         max-height: 191px;
       }
+      ol, ul{
+        list-style: none;
+        vertical-align: baseline;
+        text-align: center;
+        height: 100%;
+        box-sizing: border-box;
+        font-weight: 400;
+        display: block;
+      }
 
+      .control_box {
+        width: 824px;
+        height: 618px;
+        /*border: 1px solid black;*/
+        background-color: black;
+        opacity: 0.8;
+        position: absolute;
+        float:left;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+        text-align: center;
+        display: block;
+        height: 100%;
+        display:none;
+      }
+
+      .control_box li {
+        vertical-align: middle;
+        text-align: center;
+        display: inline-block;
+        /*margin-left: 50%;
+        margin-top: 50%;*/
+        /*margin-right: auto;*/
+        /*position: absolute;*/
+        margin: 27% auto 0  ;
+
+        /*top: 50%;*/
+        /*left: 50%;*/
+        /*transform: translate(-50%, -50%);*/
+        /*padding: 5px;*/
+      }
+      .control_box ul {
+        display: inline-block;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+        line-height: 1;
+        /*top: 50%;*/
+        /*left: 50%;*/
+        padding-left: 0;
+        /*transform: translate(-50%, -50%);*/
+
+      }
+      button {
+          margin: 0;
+          padding: 0;
+          cursor: pointer;
+          text-align: center;
+          text-rendering: auto;
+          color: initial;
+          letter-spacing: normal;
+          word-spacing: normal;
+          text-transform: none;
+          text-indent: 0px;
+          text-shadow: none;
+          outline: 0;
+          border: 0;
+      }
+
+
+    .btn_add {
+    display: inline-block;
+    background: url('./add-picture.png') 50% no-repeat;
+    width: 128px;
+    background-size: 33px 35px;
+    vertical-align: middle;
+    padding-top: 10%;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding-top: 52%;
+    }
+
+    .btn_del {
+    display: inline-block;
+    background: url('./trash.png') 50% no-repeat;
+    width: 128px;
+    background-size: 33px 35px;
+    vertical-align: middle;
+    padding-top: 10%;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding-top: 52%;
+    }
+
+    .btn_edit {
+    display: inline-block;
+    background: url('./edit-picture.png') 50% no-repeat;
+    width: 128px;
+    background-size: 33px 35px;
+    vertical-align: middle;
+    padding-top: 10%;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding-top: 52%;
+    }
+
+    .btn_caption {
+    display: inline-block;
+    background: url('./speech-bubble.png') 50% no-repeat;
+    width: 128px;
+    background-size: 33px 35px;
+    vertical-align: middle;
+    padding-top: 10%;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding-top: 52%;
+    }
     </style>
   </head>
+  <script src="../../main_minkdak/node_modules/jquery/dist/jquery.min.js"></script>
+
   <body>
     <div class="whole_collage9">
 
       <!--하나짜리 큰거-->
+      <div class="control_box">
       <div  id="collage9-1-big"><img id="img_4" src="ca.jpg"></div>
 
       <div  class="four_of_nine">
@@ -68,14 +196,43 @@
       </div>
 
 
- 
-      <div  class="bottom_four_of_nine"><img src="ca.jpg"></div>
-      <div  class="bottom_four_of_nine"><img src="ca.jpg"></div>
-      <div  class="bottom_four_of_nine"><img src="ca.jpg"></div>
-      <div  class="bottom_four_of_nine"><img src="ca.jpg"></div>
 
+      <div  class="bottom_four_of_nine"><img src="ca.jpg"></div>
+      <div  class="bottom_four_of_nine"><img src="ca.jpg"></div>
+      <div  class="bottom_four_of_nine"><img src="ca.jpg"></div>
+      <div  class="bottom_four_of_nine"><img src="ca.jpg"></div>
+      <ul class="clrfix">
+        <li><button type="button" class="btn_add">추가</button><input type="file" accept="image/*" multiple="" style="display: none;"></li>
+        <li><button type="button" class="btn_edit">편집</button></li>
+        <li><button type="button" class="btn_caption">캡션</button></li>
+        <li><button type="button" class="btn_del">삭제</button></li>
+      </ul>
+    </div>
 
   </div><!--whole_collage-->
+<script type="text/javascript">
 
+
+// control_box 열기/닫기
+$(document).ready(function() {
+  $('.whole_collage9').click(function() {
+    if($('.control_box').css("display") == "block") {
+      $('.control_box').css('display', 'none');
+    } else {
+  $('.control_box').css('display', 'block');
+}
+console.log("누름")
+
+  })
+})
+
+$(document).ready(function() {
+  $('.btn_del').click(function() {
+    $('.whole_collage9').remove()
+  })
+})
+// control_box 열기/닫기 끝
+
+</script>
   </body>
 </html>

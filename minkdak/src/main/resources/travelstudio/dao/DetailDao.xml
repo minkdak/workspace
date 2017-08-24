@@ -31,6 +31,33 @@
     
   </select> 
   
+    <update id="insertDetailByEmail" parameterType="detail" >
+  update detail set postno= #{postno} where writer=#{writer}
+  </update>
+  
+  <update id="deleteEmail" parameterType="String" >
+  update detail set writer="" where writer=#{writer}
+  </update>
+  
+   <insert id="insertDetailContent" parameterType="detail"> 
+    insert into detail(cont, postno, srtno)
+    values(#{cont},#{postno}, #{srtno})
+  </insert>
+  
+  <select id="selectedOneDetail" resultMap="detailMap" parameterType="String">
+  select * from detail where postno=#{postno} order by srtno asc
+  </select>
+  
+ <select id="selectAddress" resultMap="detailMap" parameterType="Integer">
+    select d.address
+    from post p inner join detail d on p.postno=d.postno
+    where mno=#{mno}
+  </select> 
+  
+   <insert id="addAllphoto" parameterType="detail"> 
+    insert into detail(picno, writer, srtno)
+    values(#{picno},#{writer},#{srtno})
+  </insert>
   
   <!-- 
   <select id="selectListByNames" resultMap="memberMap" parameterType="map">

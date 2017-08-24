@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import net.coobird.thumbnailator.Thumbnails;
 import travelstudio.domain.Detail;
 import travelstudio.domain.Member;
 import travelstudio.domain.Post;
@@ -38,6 +37,15 @@ public class PostControl {
     
     HashMap<String,Object> dataMap = new HashMap<>();
     dataMap.put("list", postService.list());
+//    dataMap.put("totalCount", noticeService.getSize());
+    
+    return new JsonResult(JsonResult.SUCCESS, dataMap);
+  }
+  
+  @RequestMapping("selectOneUserPost")
+  public JsonResult selectOneUserPost(int number) throws Exception {
+    HashMap<String,Object> dataMap = new HashMap<>();
+    dataMap.put("selectOneUserPost", postService.selectOneUserPost(number));
 //    dataMap.put("totalCount", noticeService.getSize());
     
     return new JsonResult(JsonResult.SUCCESS, dataMap);
@@ -100,6 +108,15 @@ public class PostControl {
     return new JsonResult(JsonResult.SUCCESS, post);
   }  
   
+  @RequestMapping("info1")
+  public JsonResult info1(String number) throws Exception {
+    System.out.println(number);
+    HashMap<String,Object> dataMap = new HashMap<>();
+    dataMap.put("info", postService.info1(number));
+    return new JsonResult(JsonResult.SUCCESS, dataMap);
+  }
+  
+
   int count = 0;
   synchronized private String getNewFilename() {
     if (count > 100) {
